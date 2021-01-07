@@ -15,6 +15,23 @@ public let ServerAPI: Server = Server()
 open class Server: ObservableObject, Identifiable {
     public var id: Int = 0
     public var system : System = System()
+    public var settings : Settings =  Settings()
+    
+    
+    /// Start Server Class
+    /// - Parameters:
+    ///   - position: position lat;lon in String
+    ///   - completionHandlerStart: get back when server ready
+    public func start(platform : String, position : String, completionHandlerStart: @escaping (_ success:Bool) -> Void){
+        self.settings.platform = platform
+        self.settings.position = position
+        
+        DispatchQueue.main.async {
+            completionHandlerStart(true)
+        }
+    }
+    
+
 }
 
 
