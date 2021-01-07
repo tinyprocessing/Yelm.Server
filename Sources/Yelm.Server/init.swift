@@ -16,6 +16,7 @@ open class Server: ObservableObject, Identifiable {
     public var id: Int = 0
     public var system : System = System()
     public var settings : Settings =  Settings()
+    public var user : User =  User()
     public var items : Items =  Items()
     
     
@@ -28,9 +29,15 @@ open class Server: ObservableObject, Identifiable {
         self.settings.platform = platform
         self.settings.position = position
         
-        DispatchQueue.main.async {
-            completionHandlerStart(true)
+        self.user.registration { (registered) in
+            if (registered){
+                DispatchQueue.main.async {
+                    completionHandlerStart(true)
+                }
+            }
         }
+        
+        
     }
     
 
