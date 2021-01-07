@@ -62,7 +62,7 @@ public class Items: ObservableObject, Identifiable {
 //                        add all items in list
                         list.append(items_structure(id: item_AF["ID"].int!,
                                                     title: item_AF["Name"].string!,
-                                                    price: String(item_AF["Price"].float!),
+                                                    price: String(format:"%.2f", item_AF["Price"].float!),
                                                     text: item_AF["Description"].string!,
                                                     thubnail: item_AF["Image"][0].string!,
                                                     price_float: item_AF["Price"].float!,

@@ -83,5 +83,7 @@ public struct items_structure: Identifiable, Hashable {
     public var discount_present: String = ""
     /// Rating from system
     public var ItemRating: Int = 5
+    /// Actions for sub actions
+    public var action: [String] = []
 
 }

@@ -26,7 +26,7 @@ open class System: ObservableObject, Identifiable {
     public let name = "\(Device.current.name ?? "")"
     public let supportsWirelessCharging = "\(Device.current.supportsWirelessCharging)"
     
-    public func json() -> String {
+    public func data_string() -> String {
         let data = JSON([
             "systemVersion": systemVersion,
             "systemName": systemName,
@@ -46,9 +46,5 @@ open class System: ObservableObject, Identifiable {
         return data_string!
     }
     
-    public func auth() {
-        let data = self.json()
-        print(data)
-        
-    }
+  
 }
