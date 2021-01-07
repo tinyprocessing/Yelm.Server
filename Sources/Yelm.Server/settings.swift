@@ -17,7 +17,7 @@ public class Settings: ObservableObject, Identifiable {
     public var id: Int = 0
     var domain : String = "https://rest.yelm.io/api/"
     var position : String = ""
-    var platform : String = "yelmio"
+    var platform : String = ""
     public var debug : Bool = true
     
 //    Settings for application from server
@@ -36,12 +36,23 @@ public class Settings: ObservableObject, Identifiable {
             url = self.domain
             url += method
             url += "?Version=\(version)&RegionCode=\(Locale.current.regionCode!)&LanguageCode=\(Locale.current.languageCode!)&Platform=\(self.platform)"
+            if (self.position == ""){
+                url += "&LAT=0&LON=0"
+            }else{
+                url += position
+            }
+          
             
         }else{
 
             url = self.domain
             url += method
             url += "?Version=\(version)&RegionCode=US&LanguageCode=en&Platform=\(self.platform)"
+            if (self.position == ""){
+                url += "&LAT=0&LON=0"
+            }else{
+                url += position
+            }
             
         }
         
