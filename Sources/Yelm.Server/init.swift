@@ -16,10 +16,12 @@ open class Server: ObservableObject, Identifiable {
     public var id: Int = 0
     public var system : System = System()
     public var settings : Settings =  Settings()
+    public var items : Items =  Items()
     
     
     /// Start Server Class
     /// - Parameters:
+    ///   - platform: platform String
     ///   - position: position lat;lon in String
     ///   - completionHandlerStart: get back when server ready
     public func start(platform : String, position : String, completionHandlerStart: @escaping (_ success:Bool) -> Void){
