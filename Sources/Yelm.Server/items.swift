@@ -25,7 +25,7 @@ public class Items: ObservableObject, Identifiable {
         AF.request(ServerAPI.settings.url(method: "m-items")).responseJSON { (response) in
             if (response.value != nil) {
                 let json = JSON(response.value!)
-                let json_string_cache = json.rawString()
+//                let json_string_cache = json.rawString()
                 
                 if (json.count == 0) { return }
                 
