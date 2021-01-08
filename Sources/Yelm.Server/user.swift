@@ -18,14 +18,27 @@ public class User: ObservableObject, Identifiable {
     public var username: String = ""
     
     
-    public func registration(completionHandlerUser: @escaping (_ success:Bool) -> Void){
+    public func registration(completionHandlerUser: @escaping (_ success:Bool, _ user: String) -> Void){
         
         let data_system = ServerAPI.system.data_string()
         print(data_system)
         
-        DispatchQueue.main.async {
-            completionHandlerUser(true)
+        AF.request(ServerAPI.settings.url(method: "user", dev: true), method: .post, parameters: ["user_info" : ServerAPI.system.data_json()]).responseJSON { (response) in
+            
+            if (response.value != nil) {
+                
+                let json = JSON(response.value!)
+                if (ServerAPI.settings.debug){
+                    print(json)
+                }
+                DispatchQueue.main.async {
+                    completionHandlerUser(true, json["login"].string!)
+                }
+                
+            }
         }
+        
+      
     }
     
     

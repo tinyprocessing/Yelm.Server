@@ -16,6 +16,7 @@ let version : String = "3.0"
 public class Settings: ObservableObject, Identifiable {
     public var id: Int = 0
     var domain : String = "https://rest.yelm.io/api/"
+    var domain_beta : String = "https://dev.yelm.io/api/mobile/"
     public var position : String = ""
     var platform : String = ""
     public var debug : Bool = true
@@ -34,11 +35,16 @@ public class Settings: ObservableObject, Identifiable {
         self.position = point
     }
     
-    func url(method: String) -> String {
+    func url(method: String, dev: Bool = false) -> String {
         var url : String = ""
         if (Locale.current.regionCode != nil && Locale.current.languageCode != nil){
             
-            url = self.domain
+            if (dev == false){
+                url = self.domain
+            }else{
+                url = self.domain_beta
+            }
+           
             url += method
             url += "?Version=\(version)&RegionCode=\(Locale.current.regionCode!)&LanguageCode=\(Locale.current.languageCode!)&Platform=\(self.platform)"
             if (self.position == ""){
@@ -50,7 +56,12 @@ public class Settings: ObservableObject, Identifiable {
             
         }else{
 
-            url = self.domain
+            if (dev == false){
+                url = self.domain
+            }else{
+                url = self.domain_beta
+            }
+            
             url += method
             url += "?Version=\(version)&RegionCode=US&LanguageCode=en&Platform=\(self.platform)"
             if (self.position == ""){

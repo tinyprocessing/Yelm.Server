@@ -46,5 +46,25 @@ open class System: ObservableObject, Identifiable {
         return data_string!
     }
     
+    public func data_json() -> JSON {
+        let data = JSON([
+            "systemVersion": systemVersion,
+            "systemName": systemName,
+            "model": model,
+            "batteryLevel": batteryLevel,
+            "batteryState": batteryState,
+            "cameras": cameras,
+            "safeDescription": safeDescription,
+            "diagonal": diagonal,
+            "screenBrightness": screenBrightness,
+            "name": name,
+            "supportsWirelessCharging": supportsWirelessCharging,
+            ])
+
+      
+        
+        return data
+    }
+    
   
 }

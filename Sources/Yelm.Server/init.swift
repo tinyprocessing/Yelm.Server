@@ -29,12 +29,8 @@ open class Server: ObservableObject, Identifiable {
         self.settings.platform = platform
         self.settings.position = position
         
-        self.user.registration { (registered) in
-            if (registered){
-                DispatchQueue.main.async {
-                    completionHandlerStart(true)
-                }
-            }
+        DispatchQueue.main.async {
+            completionHandlerStart(true)
         }
         
         
