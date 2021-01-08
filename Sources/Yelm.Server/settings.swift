@@ -16,7 +16,7 @@ let version : String = "3.0"
 public class Settings: ObservableObject, Identifiable {
     public var id: Int = 0
     var domain : String = "https://rest.yelm.io/api/"
-    var position : String = ""
+    public var position : String = ""
     var platform : String = ""
     public var debug : Bool = true
     
@@ -29,6 +29,11 @@ public class Settings: ObservableObject, Identifiable {
     /// Get url to connect rest api
     /// - Parameter method: Method Name - example m-application
     /// - Returns: Ready string
+    
+    public func set_position(point: String) {
+        self.position = point
+    }
+    
     func url(method: String) -> String {
         var url : String = ""
         if (Locale.current.regionCode != nil && Locale.current.languageCode != nil){
@@ -39,7 +44,7 @@ public class Settings: ObservableObject, Identifiable {
             if (self.position == ""){
                 url += "&LAT=0&LON=0"
             }else{
-                url += position
+                url += ("&"+position)
             }
           
             
@@ -51,7 +56,7 @@ public class Settings: ObservableObject, Identifiable {
             if (self.position == ""){
                 url += "&LAT=0&LON=0"
             }else{
-                url += position
+                url += ("&"+position)
             }
             
         }
