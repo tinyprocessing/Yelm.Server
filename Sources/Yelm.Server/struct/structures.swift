@@ -55,6 +55,25 @@ public struct items_main_cateroties: Identifiable, Hashable {
 }
 
 public struct items_structure: Identifiable, Hashable {
+    
+    public init(id: Int = 0, title: String = "", price: String = "", text: String = "", thubnail: String = "", price_float: Float = 0.0, all_images: [String] = [], parameters: [parameters_structure] = [], type: String = "", quanity: String = "", discount: String = "", discount_value: Int = 0, discount_present: String = "", ItemRating: Int = 5, action: [String] = []) {
+        self.id = id
+        self.title = title
+        self.price = price
+        self.text = text
+        self.thubnail = thubnail
+        self.price_float = price_float
+        self.all_images = all_images
+        self.parameters = parameters
+        self.type = type
+        self.quanity = quanity
+        self.discount = discount
+        self.discount_value = discount_value
+        self.discount_present = discount_present
+        self.ItemRating = ItemRating
+        self.action = action
+    }
+    
     /// ID from YELM system
     public var id: Int
     /// Name of item
@@ -85,5 +104,7 @@ public struct items_structure: Identifiable, Hashable {
     public var ItemRating: Int = 5
     /// Actions for sub actions
     public var action: [String] = []
+    
+  
 
 }
