@@ -42,7 +42,7 @@ public class Items: ObservableObject, Identifiable {
                         let discount_final = item_AF["Price"].float! - discount_AF
                         let final = discount_final
                         
-                        let parameter_AF = object["Specifications"]
+                        let parameter_AF = item_AF["Specifications"]
                         var parameters : [parameters_structure] = []
                         
                         if (parameter_AF.count > 0){
@@ -53,6 +53,7 @@ public class Items: ObservableObject, Identifiable {
                                 parameters.append(parameters_structure(id: item_AF["ID"].int!, name: name, value: value))
                             }
                         }
+                       
                         
                         var quanity : String = ""
                         if (item_AF["Quantity"].count > 0){
