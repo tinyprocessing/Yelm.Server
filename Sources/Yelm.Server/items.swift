@@ -9,6 +9,8 @@ import Foundation
 import Alamofire
 import SwiftUI
 import SwiftyJSON
+import SystemConfiguration
+
 
 //TODO - Write Cache Policy
 
@@ -20,7 +22,13 @@ public class Items: ObservableObject, Identifiable {
     public func get_items(completionHandlerItems: @escaping (_ success:Bool,_ objects:[items_main_cateroties]) -> Void){
         
         var items: [items_main_cateroties] = []
+//        check internet connection
         
+        if (ServerAPI.settings.internet()){
+            print("internet")
+        }else{
+            print("non internet")
+        }
 //        get all items
         AF.request(ServerAPI.settings.url(method: "m-items")).responseJSON { (response) in
             if (response.value != nil) {
