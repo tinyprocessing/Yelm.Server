@@ -18,6 +18,7 @@ open class Server: ObservableObject, Identifiable {
     public var settings : Settings =  Settings()
     public var user : User =  User()
     public var items : Items =  Items()
+    public var cache : RealmCache = RealmCache()
     
     
     /// Start Server Class

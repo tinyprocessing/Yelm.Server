@@ -19,13 +19,11 @@ public class User: ObservableObject, Identifiable {
     
     
     public func notifications(user: String, token: String){
-        print("your token = " + token)
+        
         AF.request(ServerAPI.settings.url(method: "user", dev: true), method: .put, parameters: ["login" : user, "push": token]).responseJSON { (response) in
             
             if (response.value != nil) {
-                if (ServerAPI.settings.debug){
-                    print(response.value)
-                }
+                
             }
         }
         
