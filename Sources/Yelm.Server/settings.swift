@@ -48,9 +48,9 @@ public class Settings: ObservableObject, Identifiable {
             }
            
             url += method
-            url += "?Version=\(version)&RegionCode=\(Locale.current.regionCode!)&LanguageCode=\(Locale.current.languageCode!)&Platform=\(self.platform)"
+            url += "?version=\(version)&region_code=\(Locale.current.regionCode!)&language_code=\(Locale.current.languageCode!)&platform=\(self.platform)"
             if (self.position == ""){
-                url += "&LAT=0&LON=0"
+                url += "&lat=0&lon=0"
             }else{
                 url += ("&"+position)
             }
@@ -65,9 +65,9 @@ public class Settings: ObservableObject, Identifiable {
             }
             
             url += method
-            url += "?Version=\(version)&RegionCode=US&LanguageCode=en&Platform=\(self.platform)"
+            url += "?version=\(version)&region_code=US&language_code=en&platform=\(self.platform)"
             if (self.position == ""){
-                url += "&LAT=0&LON=0"
+                url += "&lat=0&lon=0"
             }else{
                 url += ("&"+position)
             }
@@ -84,7 +84,7 @@ public class Settings: ObservableObject, Identifiable {
     
     /// Get settings from server for platform
     public func get_settings(){
-        AF.request(self.url(method: "m-application")).responseJSON { (response) in
+        AF.request(self.url(method: "application", dev: true)).responseJSON { (response) in
             if (response.value != nil) {
                 let json = JSON(response.value!)[0]
                 if (json.count > 0){
@@ -92,20 +92,12 @@ public class Settings: ObservableObject, Identifiable {
                         print(json)
                     }
 //                    Payments disallow
-                    if (json["AllowPayments"].string! == "false"){
+                    if (json["allow_payments"].string! == "0"){
                         self.payments = false
                     }
 //                    Payments allow
-                    if (json["AllowPayments"].string! == "true"){
+                    if (json["allow_payments"].string! == "1"){
                         self.payments = true
-                    }
-//                    Deliverly disallow
-                    if (json["allowDeliverly"].int! == 0){
-                        self.deliverly = false
-                    }
-//                    Deliverly allow
-                    if (json["allowDeliverly"].int! == 1){
-                        self.deliverly = true
                     }
                     
 //                    Setup currency
