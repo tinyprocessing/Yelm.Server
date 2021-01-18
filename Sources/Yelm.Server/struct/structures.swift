@@ -108,3 +108,37 @@ public struct items_structure: Identifiable, Hashable {
   
 
 }
+
+
+/// News Structure
+public struct news_structure: Identifiable, Hashable {
+    
+    public init(id: Int, title: String = "", subtitle: String = "", theme: String = "", description: String = "", images: [String] = []) {
+        self.id = id
+        self.title = title
+        self.subtitle = subtitle
+        self.theme = theme
+        self.description = description
+        self.images = images
+    }
+    
+    
+    /// ID in Yelm System
+    public var id: Int
+    
+    /// News title
+    public var title: String = ""
+    
+    /// News subtitle
+    public var subtitle: String = ""
+    
+    /// News theme
+    public var theme: String = ""
+    
+    /// News body text
+    public var description: String = ""
+    
+    /// News images
+    public var images: [String] = []
+    
+}
