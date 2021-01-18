@@ -44,7 +44,9 @@ public class News: ObservableObject, Identifiable {
                                                    subtitle: object["subtitle"].string!,
                                                    theme: object["theme"].string!,
                                                    description: object["description"].string!,
-                                                   images: object["image"].string!))
+                                                   images: object["image"].string!,
+                                                   thubnail: object["preview_image"].string!
+                                                   ))
                     }
                     
                     
@@ -83,7 +85,8 @@ public class News: ObservableObject, Identifiable {
                                                subtitle: object["subtitle"].string!,
                                                theme: object["theme"].string!,
                                                description: object["description"].string!,
-                                               images: object["image"].string!))
+                                               images: object["image"].string!,
+                                               thubnail: object["preview_image"].string!))
                 }
                 
                 
