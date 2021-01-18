@@ -37,20 +37,14 @@ public class News: ObservableObject, Identifiable {
                     for i in 0...json.count - 1 {
                         let object = json[i]
                         
-                        var images : [String] = []
-                        
-                        if (object["image"].count > 0){
-                            for j in 0...object["image"].count-1{
-                                images.append(object["image"][j].string!)
-                            }
-                        }
+                   
                         
                         news.append(news_structure(id: object["id"].int!,
                                                    title: object["title"].string!,
                                                    subtitle: object["subtitle"].string!,
                                                    theme: object["theme"].string!,
                                                    description: object["description"].string!,
-                                                   images: images))
+                                                   images: object["image"].string!))
                     }
                     
                     
@@ -83,20 +77,13 @@ public class News: ObservableObject, Identifiable {
                 for i in 0...json.count - 1 {
                     let object = json[i]
                     
-                    var images : [String] = []
-                    
-                    if (object["image"].count > 0){
-                        for j in 0...object["image"].count-1{
-                            images.append(object["image"][j].string!)
-                        }
-                    }
                     
                     news.append(news_structure(id: object["id"].int!,
                                                title: object["title"].string!,
                                                subtitle: object["subtitle"].string!,
                                                theme: object["theme"].string!,
                                                description: object["description"].string!,
-                                               images: images))
+                                               images: object["image"].string!))
                 }
                 
                 

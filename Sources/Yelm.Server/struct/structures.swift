@@ -113,13 +113,14 @@ public struct items_structure: Identifiable, Hashable {
 /// News Structure
 public struct news_structure: Identifiable, Hashable {
     
-    public init(id: Int, title: String = "", subtitle: String = "", theme: String = "", description: String = "", images: [String] = []) {
+    public init(id: Int, title: String = "", subtitle: String = "", theme: String = "", description: String = "", images: String = "", thubnail: String = "") {
         self.id = id
         self.title = title
         self.subtitle = subtitle
         self.theme = theme
         self.description = description
         self.images = images
+        self.thubnail = thubnail
     }
     
     
@@ -139,6 +140,9 @@ public struct news_structure: Identifiable, Hashable {
     public var description: String = ""
     
     /// News images
-    public var images: [String] = []
+    public var images: String = ""
+    
+    /// Thubnail images
+    public var thubnail: String = ""
     
 }
