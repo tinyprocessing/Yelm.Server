@@ -24,7 +24,7 @@ public class Items: ObservableObject, Identifiable {
         
         if (ServerAPI.settings.internet()){
             
-            AF.request(ServerAPI.settings.url(method: "m-items-search")).responseJSON { (response) in
+            AF.request(ServerAPI.settings.url(method: "search", dev: true)+"&shop_id=\(ServerAPI.settings.shop_id)").responseJSON { (response) in
                 if (response.value != nil) {
                     let json = JSON(response.value!)
                     let json_string_cache = json.rawString()
@@ -45,17 +45,12 @@ public class Items: ObservableObject, Identifiable {
                     for i in 0...json.count - 1 {
                         let item_AF = json[i]
                         
-                        let price_AF = Float(item_AF["Discount"].int!) / 100
-                        let discount_AF = item_AF["Price"].float! * price_AF
-                        let discount_final = item_AF["Price"].float! - discount_AF
+                        let price_AF = Float(item_AF["discount"].int!) / 100
+                        let discount_AF = item_AF["price"].float! * price_AF
+                        let discount_final = item_AF["price"].float! - discount_AF
                         let final = discount_final
                         
-                        var quanity : String = ""
-                        if (item_AF["Quantity"].count > 0){
-                            quanity = "\(item_AF["Quantity"][0]["value"].int!)"
-                        }
-                        
-                        let parameter_AF = item_AF["Specifications"]
+                        let parameter_AF = item_AF["specification"]
                         var parameters : [parameters_structure] = []
                         
                         if (parameter_AF.count > 0){
@@ -63,23 +58,23 @@ public class Items: ObservableObject, Identifiable {
                                 let parameter_single = parameter_AF[k]
                                 let name = parameter_single["name"].string!
                                 let value = parameter_single["value"].string!
-                                parameters.append(parameters_structure(id: item_AF["ID"].int!, name: name, value: value))
+                                parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
                             }
                         }
                         
-                        items.append(items_structure(id: item_AF["ID"].int!,
-                                                    title: item_AF["Name"].string!,
-                                                    price: String(format:"%.2f", item_AF["Price"].float!),
-                                                    text: item_AF["Description"].string!,
-                                                    thubnail: item_AF["Image"][0].string!,
-                                                    price_float: item_AF["Price"].float!,
+                        items.append(items_structure(id: item_AF["id"].int!,
+                                                    title: item_AF["name"].string!,
+                                                    price: String(format:"%.2f", item_AF["price"].float!),
+                                                    text: item_AF["description"].string!,
+                                                    thubnail: item_AF["images"][0].string!,
+                                                    price_float: item_AF["price"].float!,
                                                     all_images: [],
                                                     parameters: parameters,
-                                                    type: item_AF["Type"].string!,
-                                                    quanity: quanity,
+                                                    type: item_AF["type"].string!,
+                                                    quanity: "\(item_AF["unit_type"].int!)",
                                                     discount: String(format:"%.2f", final),
-                                                    discount_value: item_AF["Discount"].int!,
-                                                    discount_present: "-\(item_AF["Discount"].int!)%",
+                                                    discount_value: item_AF["discount"].int!,
+                                                    discount_present: "-\(item_AF["discount"].int!)%",
                                                     ItemRating: 5))
                         
                     }
@@ -109,17 +104,14 @@ public class Items: ObservableObject, Identifiable {
                 for i in 0...json.count - 1 {
                     let item_AF = json[i]
                     
-                    let price_AF = Float(item_AF["Discount"].int!) / 100
-                    let discount_AF = item_AF["Price"].float! * price_AF
-                    let discount_final = item_AF["Price"].float! - discount_AF
+                    let price_AF = Float(item_AF["discount"].int!) / 100
+                    let discount_AF = item_AF["price"].float! * price_AF
+                    let discount_final = item_AF["price"].float! - discount_AF
                     let final = discount_final
                     
-                    var quanity : String = ""
-                    if (item_AF["Quantity"].count > 0){
-                        quanity = "\(item_AF["Quantity"][0]["value"].int!)"
-                    }
+                 
                     
-                    let parameter_AF = item_AF["Specifications"]
+                    let parameter_AF = item_AF["specification"]
                     var parameters : [parameters_structure] = []
                     
                     if (parameter_AF.count > 0){
@@ -127,23 +119,23 @@ public class Items: ObservableObject, Identifiable {
                             let parameter_single = parameter_AF[k]
                             let name = parameter_single["name"].string!
                             let value = parameter_single["value"].string!
-                            parameters.append(parameters_structure(id: item_AF["ID"].int!, name: name, value: value))
+                            parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
                         }
                     }
                     
-                    items.append(items_structure(id: item_AF["ID"].int!,
-                                                title: item_AF["Name"].string!,
-                                                price: String(format:"%.2f", item_AF["Price"].float!),
-                                                text: item_AF["Description"].string!,
-                                                thubnail: item_AF["Image"][0].string!,
-                                                price_float: item_AF["Price"].float!,
+                    items.append(items_structure(id: item_AF["id"].int!,
+                                                title: item_AF["name"].string!,
+                                                price: String(format:"%.2f", item_AF["price"].float!),
+                                                text: item_AF["description"].string!,
+                                                thubnail: item_AF["images"][0].string!,
+                                                price_float: item_AF["price"].float!,
                                                 all_images: [],
                                                 parameters: parameters,
-                                                type: item_AF["Type"].string!,
-                                                quanity: quanity,
+                                                type: item_AF["type"].string!,
+                                                quanity: "\(item_AF["unit_type"].int!)",
                                                 discount: String(format:"%.2f", final),
-                                                discount_value: item_AF["Discount"].int!,
-                                                discount_present: "-\(item_AF["Discount"].int!)%",
+                                                discount_value: item_AF["discount"].int!,
+                                                discount_present: "-\(item_AF["discount"].int!)%",
                                                 ItemRating: 5))
                     
                 }
@@ -171,7 +163,7 @@ public class Items: ObservableObject, Identifiable {
         
         if (ServerAPI.settings.internet()){
             
-            AF.request(ServerAPI.settings.url(method: "m-items")).responseJSON { (response) in
+            AF.request(ServerAPI.settings.url(method: "items", dev: true)).responseJSON { (response) in
                 if (response.value != nil) {
                     let json = JSON(response.value!)
                     let json_string_cache = json.rawString()
@@ -187,18 +179,18 @@ public class Items: ObservableObject, Identifiable {
                     
                     for i in 0...json.count - 1 {
                         let object = json[i]
-                        let name = object["Name"].string!
+                        let name = object["name"].string!
                         var list : [items_structure] = []
                         
-                        for j in 0...object["Items"].count - 1  {
-                            let item_AF = object["Items"][j]
+                        for j in 0...object["items"].count - 1  {
+                            let item_AF = object["items"][j]
     //                        math discount
-                            let price_AF = Float(item_AF["Discount"].int!) / 100
-                            let discount_AF = item_AF["Price"].float! * price_AF
-                            let discount_final = item_AF["Price"].float! - discount_AF
+                            let price_AF = Float(item_AF["discount"].int!) / 100
+                            let discount_AF = item_AF["price"].float! * price_AF
+                            let discount_final = item_AF["price"].float! - discount_AF
                             let final = discount_final
                             
-                            let parameter_AF = item_AF["Specifications"]
+                            let parameter_AF = item_AF["specification"]
                             var parameters : [parameters_structure] = []
                             
                             if (parameter_AF.count > 0){
@@ -206,31 +198,28 @@ public class Items: ObservableObject, Identifiable {
                                     let parameter_single = parameter_AF[k]
                                     let name = parameter_single["name"].string!
                                     let value = parameter_single["value"].string!
-                                    parameters.append(parameters_structure(id: item_AF["ID"].int!, name: name, value: value))
+                                    parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
                                 }
                             }
                            
+                      
                             
-                            var quanity : String = ""
-                            if (item_AF["Quantity"].count > 0){
-                                quanity = "\(item_AF["Quantity"][0]["value"].int!)"
-                            }
                             
     //                        add all items in list
-                            list.append(items_structure(id: item_AF["ID"].int!,
-                                                        title: item_AF["Name"].string!,
-                                                        price: String(format:"%.2f", item_AF["Price"].float!),
-                                                        text: item_AF["Description"].string!,
-                                                        thubnail: item_AF["Image"][0].string!,
-                                                        price_float: item_AF["Price"].float!,
+                            list.append(items_structure(id: item_AF["id"].int!,
+                                                        title: item_AF["name"].string!,
+                                                        price: String(format:"%.2f", item_AF["price"].float!),
+                                                        text: item_AF["description"].string!,
+                                                        thubnail: item_AF["images"][0].string!,
+                                                        price_float: item_AF["price"].float!,
                                                         all_images: [],
                                                         parameters: parameters,
-                                                        type: item_AF["Type"].string!,
-                                                        quanity: quanity,
+                                                        type: item_AF["type"].string!,
+                                                        quanity: "\(item_AF["unit_type"].int!)",
                                                         discount: String(format:"%.2f", final),
-                                                        discount_value: item_AF["Discount"].int!,
-                                                        discount_present: "-\(item_AF["Discount"].int!)%",
-                                                        ItemRating: 5))
+                                                        discount_value: item_AF["discount"].int!,
+                                                        discount_present: "-\(item_AF["discount"].int!)%",
+                                                        ItemRating: item_AF["rating"].int!))
                             
                         }
     //                    add object to main view with attachment
@@ -265,18 +254,18 @@ public class Items: ObservableObject, Identifiable {
                 
                 for i in 0...json.count - 1 {
                     let object = json[i]
-                    let name = object["Name"].string!
+                    let name = object["name"].string!
                     var list : [items_structure] = []
                     
-                    for j in 0...object["Items"].count - 1  {
-                        let item_AF = object["Items"][j]
+                    for j in 0...object["items"].count - 1  {
+                        let item_AF = object["items"][j]
 //                        math discount
-                        let price_AF = Float(item_AF["Discount"].int!) / 100
-                        let discount_AF = item_AF["Price"].float! * price_AF
-                        let discount_final = item_AF["Price"].float! - discount_AF
+                        let price_AF = Float(item_AF["discount"].int!) / 100
+                        let discount_AF = item_AF["price"].float! * price_AF
+                        let discount_final = item_AF["price"].float! - discount_AF
                         let final = discount_final
                         
-                        let parameter_AF = item_AF["Specifications"]
+                        let parameter_AF = item_AF["specification"]
                         var parameters : [parameters_structure] = []
                         
                         if (parameter_AF.count > 0){
@@ -284,31 +273,26 @@ public class Items: ObservableObject, Identifiable {
                                 let parameter_single = parameter_AF[k]
                                 let name = parameter_single["name"].string!
                                 let value = parameter_single["value"].string!
-                                parameters.append(parameters_structure(id: item_AF["ID"].int!, name: name, value: value))
+                                parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
                             }
                         }
                        
                         
-                        var quanity : String = ""
-                        if (item_AF["Quantity"].count > 0){
-                            quanity = "\(item_AF["Quantity"][0]["value"].int!)"
-                        }
-                        
 //                        add all items in list
-                        list.append(items_structure(id: item_AF["ID"].int!,
-                                                    title: item_AF["Name"].string!,
-                                                    price: String(format:"%.2f", item_AF["Price"].float!),
-                                                    text: item_AF["Description"].string!,
-                                                    thubnail: item_AF["Image"][0].string!,
-                                                    price_float: item_AF["Price"].float!,
+                        list.append(items_structure(id: item_AF["id"].int!,
+                                                    title: item_AF["name"].string!,
+                                                    price: String(format:"%.2f", item_AF["price"].float!),
+                                                    text: item_AF["description"].string!,
+                                                    thubnail: item_AF["images"][0].string!,
+                                                    price_float: item_AF["price"].float!,
                                                     all_images: [],
                                                     parameters: parameters,
-                                                    type: item_AF["Type"].string!,
-                                                    quanity: quanity,
+                                                    type: item_AF["type"].string!,
+                                                    quanity: "\(item_AF["unit_type"].int!)",
                                                     discount: String(format:"%.2f", final),
-                                                    discount_value: item_AF["Discount"].int!,
-                                                    discount_present: "-\(item_AF["Discount"].int!)%",
-                                                    ItemRating: 5))
+                                                    discount_value: item_AF["discount"].int!,
+                                                    discount_present: "-\(item_AF["discount"].int!)%",
+                                                    ItemRating: item_AF["rating"].int!))
                         
                     }
 //                    add object to main view with attachment
