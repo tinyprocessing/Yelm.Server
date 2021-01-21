@@ -27,8 +27,12 @@ public class Settings: ObservableObject, Identifiable {
     public var deliverly : Bool = false
     public var takeoff : Bool = false
     public var payments : Bool = false
-    public var price : String = "USD"
+    public var currency : String = ""
+    public var symbol : String = ""
     
+    public var shop_id : Int = 0
+    
+
     /// Get url to connect rest api
     /// - Parameter method: Method Name - example m-application
     /// - Returns: Ready string
@@ -86,23 +90,27 @@ public class Settings: ObservableObject, Identifiable {
     public func get_settings(){
         AF.request(self.url(method: "application", dev: true)).responseJSON { (response) in
             if (response.value != nil) {
-                let json = JSON(response.value!)[0]
+                let json = JSON(response.value!)
                 if (json.count > 0){
                     if (self.debug){
                         print(json)
                     }
+                    
+                    
+                    let settings = json["settings"]
 //                    Payments disallow
-                    if (json["allow_payments"].string! == "0"){
+                    if (settings["allow_payments"].string! == "0"){
                         self.payments = false
                     }
 //                    Payments allow
-                    if (json["allow_payments"].string! == "1"){
+                    if (settings["allow_payments"].string! == "1"){
                         self.payments = true
                     }
                     
 //                    Setup currency
-                    self.price = json["CNT"].string!
-                    
+                    self.currency = json["currency"].string!
+                    self.symbol = json["symbol"].string!
+                    self.shop_id = json["shop_id"].int!
                     
                 }
             }
