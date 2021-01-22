@@ -30,6 +30,10 @@ public class Settings: ObservableObject, Identifiable {
     public var currency : String = ""
     public var symbol : String = ""
     
+//    colors
+    public var theme : String = ""
+    public var foreground : String = ""
+    
     public var shop_id : Int = 0
     
 
@@ -87,7 +91,7 @@ public class Settings: ObservableObject, Identifiable {
     
     
     /// Get settings from server for platform
-    public func get_settings(){
+    public func get_settings(completionHandlerSettings: @escaping (_ success:Bool) -> Void){
         AF.request(self.url(method: "application", dev: true)).responseJSON { (response) in
             if (response.value != nil) {
                 let json = JSON(response.value!)
@@ -99,18 +103,25 @@ public class Settings: ObservableObject, Identifiable {
                     
                     let settings = json["settings"]
 //                    Payments disallow
-                    if (settings["allow_payments"].string! == "0"){
-                        self.payments = false
-                    }
+//                    if (settings["allow_payments"].string! == "0"){
+//                        self.payments = false
+//                    }
 //                    Payments allow
-                    if (settings["allow_payments"].string! == "1"){
-                        self.payments = true
-                    }
+//                    if (settings["allow_payments"].string! == "1"){
+//                        self.payments = true
+//                    }
                     
 //                    Setup currency
                     self.currency = json["currency"].string!
                     self.symbol = json["symbol"].string!
                     self.shop_id = json["shop_id"].int!
+                    
+                    self.theme = settings["theme"].string!
+                    self.foreground = settings["foreground"].string!
+    
+                    DispatchQueue.main.async {
+                        completionHandlerSettings(true)
+                    }
                     
                 }
             }
