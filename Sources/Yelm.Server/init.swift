@@ -19,6 +19,7 @@ open class Server: ObservableObject, Identifiable {
     public var user : User =  User()
     public var items : Items =  Items()
     public var news : News =  News()
+    public var basket : Basket =  Basket()
     public var cache : RealmCache = RealmCache()
    
 
