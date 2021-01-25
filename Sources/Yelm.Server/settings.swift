@@ -36,6 +36,10 @@ public class Settings: ObservableObject, Identifiable {
     
     public var shop_id : Int = 0
     
+    
+    public var deliverly_time : String = ""
+    public var deliverly_price : Float = 0
+    
 
     /// Get url to connect rest api
     /// - Parameter method: Method Name - example m-application
