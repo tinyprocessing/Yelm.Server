@@ -56,7 +56,7 @@ public struct items_main_cateroties: Identifiable, Hashable {
 
 public struct items_structure: Identifiable, Hashable {
     
-    public init(id: Int = 0, title: String = "", price: String = "", text: String = "", thubnail: String = "", price_float: Float = 0.0, all_images: [String] = [], parameters: [parameters_structure] = [], type: String = "", quanity: String = "", discount: String = "", discount_value: Int = 0, discount_present: String = "", ItemRating: Int = 5, action: [String] = []) {
+    public init(id: Int = 0, title: String = "", price: String = "", text: String = "", thubnail: String = "", price_float: Float = 0.0, all_images: [String] = [], parameters: [parameters_structure] = [], type: String = "", quanity: String = "", discount: String = "", discount_value: Int = 0, discount_present: String = "", rating: Int = 5, action: [String] = []) {
         self.id = id
         self.title = title
         self.price = price
@@ -70,7 +70,7 @@ public struct items_structure: Identifiable, Hashable {
         self.discount = discount
         self.discount_value = discount_value
         self.discount_present = discount_present
-        self.ItemRating = ItemRating
+        self.rating = rating
         self.action = action
     }
     
@@ -101,7 +101,7 @@ public struct items_structure: Identifiable, Hashable {
     /// String to present discount
     public var discount_present: String = ""
     /// Rating from system
-    public var ItemRating: Int = 5
+    public var rating: Int = 5
     /// Actions for sub actions
     public var action: [String] = []
     
