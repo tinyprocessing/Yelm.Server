@@ -62,13 +62,18 @@ public class Items: ObservableObject, Identifiable {
                             }
                         }
                         
+                        var images : [String] = []
+                        for k in 0...item_AF["images"].count-1{
+                            images.append(item_AF["images"][k].string!)
+                        }
+                        
                         items.append(items_structure(id: item_AF["id"].int!,
                                                     title: item_AF["name"].string!,
                                                     price: String(format:"%.2f", item_AF["price"].float!),
                                                     text: item_AF["description"].string!,
-                                                    thubnail: item_AF["images"][0].string!,
+                                                    thubnail: item_AF["preview_image"].string!,
                                                     price_float: item_AF["price"].float!,
-                                                    all_images: [],
+                                                    all_images: images,
                                                     parameters: parameters,
                                                     type: item_AF["type"].string!,
                                                     quanity: "\(item_AF["unit_type"].int!)",
@@ -123,13 +128,18 @@ public class Items: ObservableObject, Identifiable {
                         }
                     }
                     
+                    var images : [String] = []
+                    for k in 0...item_AF["images"].count-1{
+                        images.append(item_AF["images"][k].string!)
+                    }
+                    
                     items.append(items_structure(id: item_AF["id"].int!,
                                                 title: item_AF["name"].string!,
                                                 price: String(format:"%.2f", item_AF["price"].float!),
                                                 text: item_AF["description"].string!,
-                                                thubnail: item_AF["images"][0].string!,
+                                                thubnail: item_AF["preview_image"].string!,
                                                 price_float: item_AF["price"].float!,
-                                                all_images: [],
+                                                all_images: images,
                                                 parameters: parameters,
                                                 type: item_AF["type"].string!,
                                                 quanity: "\(item_AF["unit_type"].int!)",
@@ -207,16 +217,19 @@ public class Items: ObservableObject, Identifiable {
                             }
                            
                       
-                            
+                            var images : [String] = []
+                            for k in 0...item_AF["images"].count-1{
+                                images.append(item_AF["images"][k].string!)
+                            }
                             
     //                        add all items in list
                             list.append(items_structure(id: item_AF["id"].int!,
                                                         title: item_AF["name"].string!,
                                                         price: String(format:"%.2f", item_AF["price"].float!),
                                                         text: item_AF["description"].string!,
-                                                        thubnail: item_AF["images"][0].string!,
+                                                        thubnail: item_AF["preview_image"].string!,
                                                         price_float: item_AF["price"].float!,
-                                                        all_images: [],
+                                                        all_images: images,
                                                         parameters: parameters,
                                                         type: item_AF["type"].string!,
                                                         quanity: "\(item_AF["unit_type"].int!)",
@@ -285,15 +298,19 @@ public class Items: ObservableObject, Identifiable {
                             }
                         }
                        
+                        var images : [String] = []
+                        for k in 0...item_AF["images"].count-1{
+                            images.append(item_AF["images"][k].string!)
+                        }
                         
 //                        add all items in list
                         list.append(items_structure(id: item_AF["id"].int!,
                                                     title: item_AF["name"].string!,
                                                     price: String(format:"%.2f", item_AF["price"].float!),
                                                     text: item_AF["description"].string!,
-                                                    thubnail: item_AF["images"][0].string!,
+                                                    thubnail: item_AF["preview_image"].string!,
                                                     price_float: item_AF["price"].float!,
-                                                    all_images: [],
+                                                    all_images: images,
                                                     parameters: parameters,
                                                     type: item_AF["type"].string!,
                                                     quanity: "\(item_AF["unit_type"].int!)",
@@ -369,16 +386,19 @@ public class Items: ObservableObject, Identifiable {
                         }
                        
                   
-                        
+                        var images : [String] = []
+                        for k in 0...item_AF["images"].count-1{
+                            images.append(item_AF["images"][k].string!)
+                        }
                         
 //                        add all items in list
                         list.append(items_structure(id: item_AF["id"].int!,
                                                     title: item_AF["name"].string!,
                                                     price: String(format:"%.2f", item_AF["price"].float!),
                                                     text: item_AF["description"].string!,
-                                                    thubnail: item_AF["images"][0].string!,
+                                                    thubnail: item_AF["preview_image"].string!,
                                                     price_float: item_AF["price"].float!,
-                                                    all_images: [],
+                                                    all_images: images,
                                                     parameters: parameters,
                                                     type: item_AF["type"].string!,
                                                     quanity: "\(item_AF["unit_type"].int!)",
