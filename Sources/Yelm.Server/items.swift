@@ -80,7 +80,8 @@ public class Items: ObservableObject, Identifiable {
                                                     discount: String(format:"%.2f", final),
                                                     discount_value: item_AF["discount"].int!,
                                                     discount_present: "-\(item_AF["discount"].int!)%",
-                                                    rating: item_AF["rating"].int!))
+                                                    rating: item_AF["rating"].int!,
+                                                    amount: item_AF["quantity"].int!))
                         
                     }
                     
@@ -146,7 +147,8 @@ public class Items: ObservableObject, Identifiable {
                                                 discount: String(format:"%.2f", final),
                                                 discount_value: item_AF["discount"].int!,
                                                 discount_present: "-\(item_AF["discount"].int!)%",
-                                                rating: item_AF["rating"].int!))
+                                                rating: item_AF["rating"].int!,
+                                                amount: item_AF["quantity"].int!))
                     
                 }
                 
@@ -236,7 +238,8 @@ public class Items: ObservableObject, Identifiable {
                                                         discount: String(format:"%.2f", final),
                                                         discount_value: item_AF["discount"].int!,
                                                         discount_present: "-\(item_AF["discount"].int!)%",
-                                                        rating: item_AF["rating"].int!))
+                                                        rating: item_AF["rating"].int!,
+                                                        amount: item_AF["quantity"].int!))
                             
                         }
     //                    add object to main view with attachment
@@ -317,7 +320,8 @@ public class Items: ObservableObject, Identifiable {
                                                     discount: String(format:"%.2f", final),
                                                     discount_value: item_AF["discount"].int!,
                                                     discount_present: "-\(item_AF["discount"].int!)%",
-                                                    rating: item_AF["rating"].int!))
+                                                    rating: item_AF["rating"].int!,
+                                                    amount: item_AF["quantity"].int!))
                         
                     }
 //                    add object to main view with attachment
@@ -405,7 +409,8 @@ public class Items: ObservableObject, Identifiable {
                                                     discount: String(format:"%.2f", final),
                                                     discount_value: item_AF["discount"].int!,
                                                     discount_present: "-\(item_AF["discount"].int!)%",
-                                                    rating: item_AF["rating"].int!))
+                                                    rating: item_AF["rating"].int!,
+                                                    amount: item_AF["quantity"].int!))
                         
                     }
 //                    add object to main view with attachment
