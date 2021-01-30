@@ -106,15 +106,7 @@ public class Settings: ObservableObject, Identifiable {
                     
                     
                     let settings = json["settings"]
-//                    Payments disallow
-//                    if (settings["allow_payments"].string! == "0"){
-//                        self.payments = false
-//                    }
-//                    Payments allow
-//                    if (settings["allow_payments"].string! == "1"){
-//                        self.payments = true
-//                    }
-                    
+
 //                    Setup currency
                     self.currency = json["currency"].string!
                     self.symbol = json["symbol"].string!

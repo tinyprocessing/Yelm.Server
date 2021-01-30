@@ -60,7 +60,7 @@ open class RealmCache: ObservableObject, Identifiable {
     
     public func cache_items(value: String, name: String) {
         let realm = try! Realm()
-        print("name == \(name)")
+        
         let objects = realm.objects(CachedStrings.self).filter("name == '\(name)'")
 
         if (objects.count > 0){
