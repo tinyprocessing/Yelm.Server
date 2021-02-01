@@ -82,8 +82,8 @@ public class News: ObservableObject, Identifiable {
                     
                     news.append(news_structure(id: object["id"].int!,
                                                title: object["title"].string!,
-                                               subtitle: object["subtitle"].string!,
-                                               theme: object["theme"].string!,
+                                               subtitle: "",
+                                               theme: "",
                                                description: object["description"].string!,
                                                images: object["image"].string!,
                                                thubnail: object["preview_image"].string!))
