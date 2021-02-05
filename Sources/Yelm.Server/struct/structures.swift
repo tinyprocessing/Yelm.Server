@@ -15,6 +15,13 @@ public struct images_structure: Identifiable, Hashable {
 }
 
 public struct parameters_structure: Identifiable, Hashable {
+    
+    public init(id: Int = 0, name: String = "", value: String = "") {
+        self.id = id
+        self.name = name
+        self.value = value
+    }
+    
     public var id: Int
     /// Parameter Name
     public var name: String
