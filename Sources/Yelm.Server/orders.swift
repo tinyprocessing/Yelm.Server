@@ -36,6 +36,20 @@ public class Orders: ObservableObject, Identifiable {
         
     }
     
+    public func set_temporary_orders(item_id : Int, action : String, count : Int,  completionHandlerOrderTemporary: @escaping (_ success:Bool) -> Void){
+        
+        AF.request(ServerAPI.settings.url(method: "action", dev: true), method: .post, parameters: ["item_id" : item_id, "action": action, "count": count]).responseJSON { (response) in
+            if (response.value != nil && response.response?.statusCode == 200) {
+                
+                DispatchQueue.main.async {
+                    completionHandlerOrderTemporary(true)
+                }
+                
+            }
+        }
+    }
+    
+    
 }
 
 public class OrdersDetail: ObservableObject, Identifiable {
