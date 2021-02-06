@@ -108,10 +108,12 @@ public class Settings: ObservableObject, Identifiable {
                     let settings = json["settings"]
 
 //                    Setup currency
+                    ServerAPI.objectWillChange.send()
                     self.currency = json["currency"].string!
                     self.symbol = json["symbol"].string!
+                    ServerAPI.objectWillChange.send()
                     self.shop_id = json["shop_id"].int!
-                    
+                    ServerAPI.objectWillChange.send()
                     self.theme = settings["theme"].string!
                     self.foreground = settings["foreground"].string!
     
