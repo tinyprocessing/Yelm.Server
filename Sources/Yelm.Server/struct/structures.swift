@@ -7,6 +7,58 @@
 
 import Foundation
 
+public struct orders_history_count_structure: Identifiable, Hashable {
+    
+    public init(id: Int, count: Int = 0, item_id: Int = 0) {
+        self.id = id
+        self.count = count
+        self.item_id = item_id
+    }
+    
+    
+    
+    
+    public var id: Int
+    public var count: Int = 0
+    public var item_id: Int = 0
+    
+}
+
+public struct orders_history_structure: Identifiable, Hashable {
+    
+    public init(id: Int, comment: String = "", items: [items_structure] = [], address: String = "", payment: String = "", phone: String = "", items_count: [orders_history_count_structure] = [], end_total: Float = 0.0, created_at: String = "", transaction_status: String = "", latitude: String = "", longitude: String = "") {
+        self.id = id
+        self.comment = comment
+        self.items = items
+        self.address = address
+        self.payment = payment
+        self.phone = phone
+        self.items_count = items_count
+        self.end_total = end_total
+        self.created_at = created_at
+        self.transaction_status = transaction_status
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+    
+    
+   
+    
+    public var id: Int
+    
+    public var comment: String = ""
+    public var items : [items_structure] = []
+    public var address : String = ""
+    public var payment : String = ""
+    public var phone : String = ""
+    public var items_count : [orders_history_count_structure] = []
+    public var end_total : Float = 0.0
+    public var created_at : String = ""
+    public var transaction_status : String = ""
+    
+    public var latitude : String = ""
+    public var longitude : String = ""
+}
 
 public struct images_structure: Identifiable, Hashable {
     public var id: Int
