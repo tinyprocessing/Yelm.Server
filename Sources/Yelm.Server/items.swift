@@ -52,7 +52,7 @@ public class Items: ObservableObject, Identifiable {
                         
                         let parameter_AF = item_AF["specification"]
                         var parameters : [parameters_structure] = []
-                        
+                        print(item_AF)
                         if (parameter_AF.count > 0){
                             for k in 0...parameter_AF.count - 1 {
                                 let parameter_single = parameter_AF[k]

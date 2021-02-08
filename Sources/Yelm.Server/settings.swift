@@ -36,7 +36,7 @@ public class Settings: ObservableObject, Identifiable {
     
     public var shop_id : Int = 0
     
-    
+    public var public_id : String = ""
     public var deliverly_time : String = ""
     public var deliverly_price : Float = 0
     
@@ -116,7 +116,9 @@ public class Settings: ObservableObject, Identifiable {
                     ServerAPI.objectWillChange.send()
                     self.theme = settings["theme"].string!
                     self.foreground = settings["foreground"].string!
-    
+                    self.public_id = settings["public_id"].string!
+                    
+                    
                     DispatchQueue.main.async {
                         completionHandlerSettings(true)
                     }
