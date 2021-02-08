@@ -15,6 +15,27 @@ import SystemConfiguration
 public class Orders: ObservableObject, Identifiable {
     public var id: Int = 0
     
+    
+    public func get_order_history(id: String, completionHandlerHistory: @escaping (_ success:Bool) -> Void){
+        
+        AF.request(ServerAPI.settings.url(method: "order", dev: true), method: .get, parameters: ["id" : id]).responseJSON { (response) in
+            
+            if (response.value != nil && response.response?.statusCode == 200) {
+                
+                let json = JSON(response.value!)
+                
+                print(json)
+                
+                DispatchQueue.main.async {
+                    completionHandlerHistory(true)
+                }
+            }
+            
+        }
+        
+    }
+    
+    
     /// Get information from server about order
     /// - Parameters:
     ///   - items: list of items Id's
