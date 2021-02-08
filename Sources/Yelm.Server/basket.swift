@@ -19,7 +19,7 @@ public class Basket: ObservableObject, Identifiable {
     /// - Parameters:
     ///   - items: list of items Id's
     ///   - completionHandlerBasket: Handler
-    public func get_basket(items: JSON, completionHandlerBasket: @escaping (_ success:Bool) -> Void){
+    public func get_basket(items: JSON, completionHandlerBasket: @escaping (_ success:Bool, _ avalible: [orders_history_count_structure]) -> Void){
         
         
         AF.request(ServerAPI.settings.url(method: "basket", dev: true), method: .post, parameters: ["items": items.rawString()!, "shop_id" : ServerAPI.settings.shop_id]).responseJSON { (response) in
@@ -32,7 +32,7 @@ public class Basket: ObservableObject, Identifiable {
                 
                 if (json.count == 0) {
                     DispatchQueue.main.async {
-                        completionHandlerBasket(false)
+                        completionHandlerBasket(false, [])
                     }
                     return
                 }
@@ -40,8 +40,15 @@ public class Basket: ObservableObject, Identifiable {
                 ServerAPI.settings.deliverly_time = json["delivery"]["time"].string!
                 ServerAPI.settings.deliverly_price = json["delivery"]["price"].float!
                 
+                var list : [orders_history_count_structure] = []
+                if (json["deleted_id"].count > 0){
+                    for i in 0...json["deleted_id"].count-1{
+                        list.append(orders_history_count_structure(id: i, count: json["deleted_id"][i]["available_count"].int!, item_id: json["deleted_id"][i]["id"].int!))
+                    }
+                }
+                
                 DispatchQueue.main.async {
-                    completionHandlerBasket(true)
+                    completionHandlerBasket(true, list)
                 }
                 
                 
