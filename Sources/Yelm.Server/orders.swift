@@ -16,18 +16,88 @@ public class Orders: ObservableObject, Identifiable {
     public var id: Int = 0
     
     
-    public func get_order_history(id: String, completionHandlerHistory: @escaping (_ success:Bool) -> Void){
+    public func get_order_history(id: String, completionHandlerHistory: @escaping (_ success:Bool, _ object : orders_history_structure) -> Void){
+        
+        var order : orders_history_structure = orders_history_structure(id: 0)
         
         AF.request(ServerAPI.settings.url(method: "order", dev: true), method: .get, parameters: ["id" : id]).responseJSON { (response) in
             
             if (response.value != nil && response.response?.statusCode == 200) {
                 
                 let json = JSON(response.value!)
-                
                 print(json)
                 
+                order.id = Int(id)!
+                order.comment = json["comment"].string!
+                order.payment = json["payment"].string!
+                order.address = json["address"].string!
+                order.phone = json["phone"].string!
+                order.end_total = json["end_total"].float!
+                order.created_at = String(json["created_at"].string!.split(separator: "T")[0])
+                order.transaction_status = json["transaction_status"].string!
+                
+                order.longitude = json["longitude"].string!
+                order.latitude = json["latitude"].string!
+                
+                
+                var list : [items_structure] = []
+                
+                for j in 0...json["items_info"].count - 1  {
+                    let item_AF = json["items_info"][j]
+//                        math discount
+                    let price_AF = Float(item_AF["discount"].int!) / 100
+                    let discount_AF = item_AF["price"].float! * price_AF
+                    let discount_final = item_AF["price"].float! - discount_AF
+                    let final = discount_final
+                    
+                    let parameter_AF = item_AF["specification"]
+                    var parameters : [parameters_structure] = []
+                    
+                    if (parameter_AF.count > 0){
+                        for k in 0...parameter_AF.count - 1 {
+                            let parameter_single = parameter_AF[k]
+                            let name = parameter_single["name"].string!
+                            let value = parameter_single["value"].string!
+                            parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
+                        }
+                    }
+                   
+              
+                    var images : [String] = []
+                    for k in 0...item_AF["images"].count-1{
+                        images.append(item_AF["images"][k].string!)
+                    }
+                    
+//                        add all items in list
+                    list.append(items_structure(id: item_AF["id"].int!,
+                                                title: item_AF["name"].string!,
+                                                price: String(format:"%.2f", item_AF["price"].float!),
+                                                text: item_AF["description"].string!,
+                                                thubnail: item_AF["preview_image"].string!,
+                                                price_float: item_AF["price"].float!,
+                                                all_images: images,
+                                                parameters: parameters,
+                                                type: item_AF["type"].string!,
+                                                quanity: "\(item_AF["unit_type"].int!)",
+                                                discount: String(format:"%.2f", final),
+                                                discount_value: item_AF["discount"].int!,
+                                                discount_present: "-\(item_AF["discount"].int!)%",
+                                                rating: item_AF["rating"].int!,
+                                                amount: item_AF["quantity"].int!))
+                    
+                }
+              
+                order.items = list
+                
+                var list_count : [orders_history_count_structure] = []
+                for s in 0...json["items"].count - 1  {
+                    list_count.append(orders_history_count_structure(id: s, count: json["items"][s]["count"].int!, item_id: json["items"][s]["id"].int!))
+                }
+                
+                order.items_count = list_count
+                
                 DispatchQueue.main.async {
-                    completionHandlerHistory(true)
+                    completionHandlerHistory(true, order)
                 }
             }
             
