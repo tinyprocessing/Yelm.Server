@@ -22,6 +22,7 @@ open class Server: ObservableObject, Identifiable {
     public var basket : Basket =  Basket()
     public var cache : RealmCache = RealmCache()
     public var orders : Orders = Orders()
+    public var promocode : Promocode = Promocode()
    
 
     
@@ -33,6 +34,12 @@ open class Server: ObservableObject, Identifiable {
     public func start(platform : String, position : String, completionHandlerStart: @escaping (_ success:Bool) -> Void){
         self.settings.platform = platform
         self.settings.position = position
+        
+        
+        let user = UserDefaults.standard.string(forKey: "USER") ?? ""
+        if (user != ""){
+            ServerAPI.user.username = user
+        }
         
         DispatchQueue.main.async {
             completionHandlerStart(true)
