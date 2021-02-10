@@ -39,6 +39,9 @@ public class User: ObservableObject, Identifiable {
                 if (ServerAPI.settings.debug){
                     print(json)
                 }
+                
+                ServerAPI.user.username = json["login"].string!
+                
                 DispatchQueue.main.async {
                     completionHandlerUser(true, json["login"].string!)
                 }
