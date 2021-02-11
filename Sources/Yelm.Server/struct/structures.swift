@@ -7,6 +7,21 @@
 
 import Foundation
 
+
+public struct story_structure: Identifiable, Hashable  {
+    
+    public init(id: Int = 0, type: String = "", url: String = "") {
+        self.id = id
+        self.type = type
+        self.url = url
+    }
+    
+    public var id : Int = 0
+    
+    public var type : String = ""
+    public var url : String = ""
+}
+
 public struct orders_history_count_structure: Identifiable, Hashable {
     
     public init(id: Int, count: Int = 0, item_id: Int = 0) {
@@ -176,7 +191,8 @@ public struct items_structure: Identifiable, Hashable {
 /// News Structure
 public struct news_structure: Identifiable, Hashable {
     
-    public init(id: Int, title: String = "", subtitle: String = "", theme: String = "", description: String = "", images: String = "", thubnail: String = "") {
+    
+    public init(id: Int, title: String = "", subtitle: String = "", theme: String = "", description: String = "", images: String = "", thubnail: String = "", story: [story_structure] = [], type: String = "") {
         self.id = id
         self.title = title
         self.subtitle = subtitle
@@ -184,7 +200,12 @@ public struct news_structure: Identifiable, Hashable {
         self.description = description
         self.images = images
         self.thubnail = thubnail
+        self.story = story
+        self.type = type
     }
+    
+    
+
     
     
     /// ID in Yelm System
@@ -207,5 +228,11 @@ public struct news_structure: Identifiable, Hashable {
     
     /// Thubnail images
     public var thubnail: String = ""
+    
+    /// story array
+    public var story: [story_structure] = []
+    
+    /// type
+    public var type: String = ""
     
 }
