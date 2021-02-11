@@ -37,6 +37,15 @@ public class News: ObservableObject, Identifiable {
                     for i in 0...json.count - 1 {
                         let object = json[i]
                         
+                        let type : String = object["type"].string!
+                        var stories : [story_structure] = []
+                        if (object["type"].string! == "story"){
+                            for j in 0...object["story"]["urls"].count - 1 {
+                                stories.append(story_structure(id: j,
+                                                               type: object["story"]["urls"][j]["type"].string!,
+                                                               url: object["story"]["urls"][j]["url"].string!))
+                            }
+                        }
                    
                         
                         news.append(news_structure(id: object["id"].int!,
@@ -45,7 +54,9 @@ public class News: ObservableObject, Identifiable {
                                                    theme: "",
                                                    description: object["description"].string!,
                                                    images: object["image"].string!,
-                                                   thubnail: object["preview_image"].string!
+                                                   thubnail: object["preview_image"].string!,
+                                                   story: stories,
+                                                   type: type
                                                    ))
                     }
                     
@@ -75,10 +86,19 @@ public class News: ObservableObject, Identifiable {
                     return
                 }
                 
-                
                 for i in 0...json.count - 1 {
                     let object = json[i]
                     
+                    let type : String = object["type"].string!
+                    var stories : [story_structure] = []
+                    if (object["type"].string! == "story"){
+                        for j in 0...object["story"]["urls"].count - 1 {
+                            stories.append(story_structure(id: j,
+                                                           type: object["story"]["urls"][j]["type"].string!,
+                                                           url: object["story"]["urls"][j]["url"].string!))
+                        }
+                    }
+               
                     
                     news.append(news_structure(id: object["id"].int!,
                                                title: object["title"].string!,
@@ -86,7 +106,10 @@ public class News: ObservableObject, Identifiable {
                                                theme: "",
                                                description: object["description"].string!,
                                                images: object["image"].string!,
-                                               thubnail: object["preview_image"].string!))
+                                               thubnail: object["preview_image"].string!,
+                                               story: stories,
+                                               type: type
+                                               ))
                 }
                 
                 
