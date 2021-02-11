@@ -96,13 +96,20 @@ public class Settings: ObservableObject, Identifiable {
     
     /// Get settings from server for platform
     public func get_settings(completionHandlerSettings: @escaping (_ success:Bool) -> Void){
-        AF.request(self.url(method: "application", dev: true)).responseJSON { (response) in
+        
+        if (ServerAPI.settings.internet()){
+            AF.request(self.url(method: "application", dev: true)).responseJSON { (response) in
             if (response.value != nil) {
                 let json = JSON(response.value!)
                 if (json.count > 0){
                     if (self.debug){
                         print(json)
                     }
+                    
+                    
+                    let json_string_cache = json.rawString()
+                    
+                    ServerAPI.cache.cache_items(value: json_string_cache!, name: "settings")
                     
                     
                     let settings = json["settings"]
@@ -126,6 +133,35 @@ public class Settings: ObservableObject, Identifiable {
                 }
             }
         }
+        }else{
+            
+            
+            let json_cached = ServerAPI.cache.cache_read(name: "settings")
+            
+            if (json_cached != "none"){
+                
+                let json = JSON.init(parseJSON: json_cached)
+                
+                let settings = json["settings"]
+
+//                    Setup currency
+                ServerAPI.objectWillChange.send()
+                self.currency = json["currency"].string!
+                self.symbol = json["symbol"].string!
+                ServerAPI.objectWillChange.send()
+                self.shop_id = json["shop_id"].int!
+                ServerAPI.objectWillChange.send()
+                self.theme = settings["theme"].string!
+                self.foreground = settings["foreground"].string!
+                self.public_id = settings["public_id"].string!
+                
+                
+                DispatchQueue.main.async {
+                    completionHandlerSettings(true)
+                }
+            }
+        }
+        
     }
     
     
