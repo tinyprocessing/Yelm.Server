@@ -31,14 +31,30 @@ public class User: ObservableObject, Identifiable {
     
     public func registration(completionHandlerUser: @escaping (_ success:Bool, _ user: String) -> Void){
         
-        AF.request(ServerAPI.settings.url(method: "user", dev: true), method: .post, parameters: ["user_info" : ServerAPI.system.data_json()]).responseJSON { (response) in
+        
+        
+        
+      
+        AF.request(ServerAPI.settings.url(method: "user", dev: true), method: .post, parameters: ["user_info" : ServerAPI.system.data_string()]).responseJSON { (response) in
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             if (response.value != nil) {
+                
+                
                 
                 let json = JSON(response.value!)
                 if (ServerAPI.settings.debug){
                     print(json)
                 }
+                
                 
                 ServerAPI.user.username = json["login"].string!
                 
