@@ -222,7 +222,7 @@ public class OrdersDetail: ObservableObject, Identifiable {
             "delivery" : "delivery",
             "payment" : self.payment,
             "transaction_id" : self.transaction_id,
-            "items" : self.items.rawString()!,
+            "items" : self.items,
             "login" : ServerAPI.user.username,
             "delivery_price" : self.delivery_price,
             "currency" : self.currency_value
