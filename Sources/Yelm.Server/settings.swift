@@ -164,6 +164,19 @@ public class Settings: ObservableObject, Identifiable {
         
     }
     
+    public func log(action: String, about: String = "") {
+        
+        if (ServerAPI.settings.internet() && ServerAPI.user.username != ""){
+            
+            AF.request(ServerAPI.settings.url(method: "statistic", dev: true), method: .post, parameters: ["type" : action, "login" : ServerAPI.user.username, "about" : about]).responseJSON { (response) in
+                if (response.value != nil) {
+                    
+                }
+            }
+            
+        }
+        
+    }
     
     func internet() -> Bool {
         var flags = SCNetworkReachabilityFlags()
