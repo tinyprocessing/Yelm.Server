@@ -8,6 +8,21 @@
 import Foundation
 
 
+public struct promocode_structure: Identifiable, Hashable  {
+    
+    public init(id: Int = 0, type: Promocodes = .nonactive, value: Int = 0) {
+        self.id = id
+        self.type = type
+        self.value = value
+    }
+    
+    public var id : Int = 0
+    
+    public var type : Promocodes = .nonactive
+    public var value : Int = 0
+}
+
+
 public struct story_structure: Identifiable, Hashable  {
     
     public init(id: Int = 0, type: String = "", url: String = "") {
