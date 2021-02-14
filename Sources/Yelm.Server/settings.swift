@@ -40,6 +40,11 @@ public class Settings: ObservableObject, Identifiable {
     public var deliverly_time : String = ""
     public var deliverly_price : Float = 0
     
+    
+    public var news_block_title : String = "Давай дружить!"
+    public var order_minimal_price : Float = 300
+    public var order_free_delivery_price : Float = 1500
+    
 
     /// Get url to connect rest api
     /// - Parameter method: Method Name - example m-application
