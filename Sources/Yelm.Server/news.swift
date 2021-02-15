@@ -121,8 +121,6 @@ public class News: ObservableObject, Identifiable {
         
     }
     
-    
-    
     public func get_news_items(id: Int, completionHandlerItems: @escaping (_ success:Bool,_ objects:[items_structure]) -> Void){
         var items: [items_structure] = []
         
@@ -147,6 +145,7 @@ public class News: ObservableObject, Identifiable {
                  
                     
                     for j in 0...object.count - 1  {
+                        
                         let item_AF = object[j]
 //                        math discount
                         let price_AF = Float(item_AF["discount"].int!) / 100
@@ -202,6 +201,56 @@ public class News: ObservableObject, Identifiable {
             
         }
         
+    }
+    
+    public func get_news_id(id: Int, completionHandlerNews: @escaping (_ success:Bool,_ object:news_structure) -> Void){
+        
+        
+        AF.request(ServerAPI.settings.url(method: "news", dev: true), method: .get , parameters: ["id" : id]).responseJSON { (response) in
+            if (response.value != nil && response.response?.statusCode == 200) {
+                
+                var object_value : news_structure = news_structure(id: 0)
+                let json = JSON(response.value!)
+                
+                print(json)
+                
+                if (json.count == 0) {
+                    DispatchQueue.main.async {
+                        completionHandlerNews(false, news_structure(id: 0))
+                    }
+                    return
+                }
+                
+                
+                let object = json[0]
+                
+                let type : String = object["type"].string!
+                var stories : [story_structure] = []
+                if (object["type"].string! == "story"){
+                    for j in 0...object["story"]["urls"].count - 1 {
+                        stories.append(story_structure(id: j,
+                                                       type: object["story"]["urls"][j]["type"].string!,
+                                                       url: object["story"]["urls"][j]["url"].string!))
+                    }
+                }
+           
+                
+                object_value = news_structure(id: object["id"].int!,
+                                           title: object["title"].string!,
+                                           subtitle: "",
+                                           theme: "",
+                                           description: object["description"].string!,
+                                           images: object["image"].string!,
+                                           thubnail: object["preview_image"].string!,
+                                           story: stories,
+                                           type: type
+                                           )
+                
+                DispatchQueue.main.async {
+                    completionHandlerNews(true, object_value)
+                }
+            }
+        }
     }
     
 }
