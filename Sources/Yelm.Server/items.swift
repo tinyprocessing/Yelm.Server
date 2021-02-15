@@ -28,8 +28,8 @@ public class Items: ObservableObject, Identifiable {
                 if (response.value != nil) {
                     let json = JSON(response.value!)
                     let json_string_cache = json.rawString()
-
-                   
+                    
+                    
                     
                     if (json.count == 0) {
                         DispatchQueue.main.async {
@@ -38,9 +38,9 @@ public class Items: ObservableObject, Identifiable {
                         return
                     }
                     
-                   
+                    
                     ServerAPI.cache.cache_items(value: json_string_cache!, name: "items_all")
-
+                    
                     
                     for i in 0...json.count - 1 {
                         let item_AF = json[i]
@@ -68,20 +68,20 @@ public class Items: ObservableObject, Identifiable {
                         }
                         
                         items.append(items_structure(id: item_AF["id"].int!,
-                                                    title: item_AF["name"].string!,
-                                                    price: String(format:"%.2f", item_AF["price"].float!),
-                                                    text: item_AF["description"].string!,
-                                                    thubnail: item_AF["preview_image"].string!,
-                                                    price_float: item_AF["price"].float!,
-                                                    all_images: images,
-                                                    parameters: parameters,
-                                                    type: item_AF["type"].string!,
-                                                    quanity: "\(item_AF["unit_type"].int!)",
-                                                    discount: String(format:"%.2f", final),
-                                                    discount_value: item_AF["discount"].int!,
-                                                    discount_present: "-\(item_AF["discount"].int!)%",
-                                                    rating: item_AF["rating"].int!,
-                                                    amount: item_AF["quantity"].int!))
+                                                     title: item_AF["name"].string!,
+                                                     price: String(format:"%.2f", item_AF["price"].float!),
+                                                     text: item_AF["description"].string!,
+                                                     thubnail: item_AF["preview_image"].string!,
+                                                     price_float: item_AF["price"].float!,
+                                                     all_images: images,
+                                                     parameters: parameters,
+                                                     type: item_AF["type"].string!,
+                                                     quanity: "\(item_AF["unit_type"].int!)",
+                                                     discount: String(format:"%.2f", final),
+                                                     discount_value: item_AF["discount"].int!,
+                                                     discount_present: "-\(item_AF["discount"].int!)%",
+                                                     rating: item_AF["rating"].int!,
+                                                     amount: item_AF["quantity"].int!))
                         
                     }
                     
@@ -105,7 +105,7 @@ public class Items: ObservableObject, Identifiable {
                     }
                     return
                 }
-
+                
                 
                 for i in 0...json.count - 1 {
                     let item_AF = json[i]
@@ -115,7 +115,7 @@ public class Items: ObservableObject, Identifiable {
                     let discount_final = item_AF["price"].float! - discount_AF
                     let final = discount_final
                     
-                 
+                    
                     
                     let parameter_AF = item_AF["specification"]
                     var parameters : [parameters_structure] = []
@@ -135,20 +135,20 @@ public class Items: ObservableObject, Identifiable {
                     }
                     
                     items.append(items_structure(id: item_AF["id"].int!,
-                                                title: item_AF["name"].string!,
-                                                price: String(format:"%.2f", item_AF["price"].float!),
-                                                text: item_AF["description"].string!,
-                                                thubnail: item_AF["preview_image"].string!,
-                                                price_float: item_AF["price"].float!,
-                                                all_images: images,
-                                                parameters: parameters,
-                                                type: item_AF["type"].string!,
-                                                quanity: "\(item_AF["unit_type"].int!)",
-                                                discount: String(format:"%.2f", final),
-                                                discount_value: item_AF["discount"].int!,
-                                                discount_present: "-\(item_AF["discount"].int!)%",
-                                                rating: item_AF["rating"].int!,
-                                                amount: item_AF["quantity"].int!))
+                                                 title: item_AF["name"].string!,
+                                                 price: String(format:"%.2f", item_AF["price"].float!),
+                                                 text: item_AF["description"].string!,
+                                                 thubnail: item_AF["preview_image"].string!,
+                                                 price_float: item_AF["price"].float!,
+                                                 all_images: images,
+                                                 parameters: parameters,
+                                                 type: item_AF["type"].string!,
+                                                 quanity: "\(item_AF["unit_type"].int!)",
+                                                 discount: String(format:"%.2f", final),
+                                                 discount_value: item_AF["discount"].int!,
+                                                 discount_present: "-\(item_AF["discount"].int!)%",
+                                                 rating: item_AF["rating"].int!,
+                                                 amount: item_AF["quantity"].int!))
                     
                 }
                 
@@ -165,13 +165,13 @@ public class Items: ObservableObject, Identifiable {
             }
         }
         
-       
+        
     }
     
     public func get_items(completionHandlerItems: @escaping (_ success:Bool,_ objects:[items_main_cateroties]) -> Void){
         
         var items: [items_main_cateroties] = []
-//        check internet connection
+        //        check internet connection
         
         if (ServerAPI.settings.internet()){
             
@@ -194,13 +194,13 @@ public class Items: ObservableObject, Identifiable {
                         let name = object["name"].string!
                         
                         let category_id = object["category_id"].int!
-
+                        
                         
                         var list : [items_structure] = []
                         
                         for j in 0...object["items"].count - 1  {
                             let item_AF = object["items"][j]
-    //                        math discount
+                            //                        math discount
                             let price_AF = Float(item_AF["discount"].int!) / 100
                             let discount_AF = item_AF["price"].float! * price_AF
                             let discount_final = item_AF["price"].float! - discount_AF
@@ -217,14 +217,14 @@ public class Items: ObservableObject, Identifiable {
                                     parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
                                 }
                             }
-                           
-                      
+                            
+                            
                             var images : [String] = []
                             for k in 0...item_AF["images"].count-1{
                                 images.append(item_AF["images"][k].string!)
                             }
                             
-    //                        add all items in list
+                            //                        add all items in list
                             list.append(items_structure(id: item_AF["id"].int!,
                                                         title: item_AF["name"].string!,
                                                         price: String(format:"%.2f", item_AF["price"].float!),
@@ -242,11 +242,11 @@ public class Items: ObservableObject, Identifiable {
                                                         amount: item_AF["quantity"].int!))
                             
                         }
-    //                    add object to main view with attachment
+                        //                    add object to main view with attachment
                         ServerAPI.items.objectWillChange.send()
                         items.append(items_main_cateroties(id: category_id, items: list, name: name))
                     }
-    //                End add to items list and foreach
+                    //                End add to items list and foreach
                     if (ServerAPI.settings.debug){
                         print(items)
                     }
@@ -277,13 +277,13 @@ public class Items: ObservableObject, Identifiable {
                     let name = object["name"].string!
                     
                     let category_id = object["category_id"].int!
-
+                    
                     
                     var list : [items_structure] = []
                     
                     for j in 0...object["items"].count - 1  {
                         let item_AF = object["items"][j]
-//                        math discount
+                        //                        math discount
                         let price_AF = Float(item_AF["discount"].int!) / 100
                         let discount_AF = item_AF["price"].float! * price_AF
                         let discount_final = item_AF["price"].float! - discount_AF
@@ -300,13 +300,13 @@ public class Items: ObservableObject, Identifiable {
                                 parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
                             }
                         }
-                       
+                        
                         var images : [String] = []
                         for k in 0...item_AF["images"].count-1{
                             images.append(item_AF["images"][k].string!)
                         }
                         
-//                        add all items in list
+                        //                        add all items in list
                         list.append(items_structure(id: item_AF["id"].int!,
                                                     title: item_AF["name"].string!,
                                                     price: String(format:"%.2f", item_AF["price"].float!),
@@ -324,7 +324,7 @@ public class Items: ObservableObject, Identifiable {
                                                     amount: item_AF["quantity"].int!))
                         
                     }
-//                    add object to main view with attachment
+                    //                    add object to main view with attachment
                     ServerAPI.items.objectWillChange.send()
                     items.append(items_main_cateroties(id: category_id, items: list, name: name))
                 }
@@ -342,7 +342,7 @@ public class Items: ObservableObject, Identifiable {
                 
             }
         }
-
+        
     }
     
     public func subcategories(id: Int, completionHandlerSubcategories: @escaping (_ success:Bool,_ objects:[items_main_cateroties]) -> Void){
@@ -350,8 +350,8 @@ public class Items: ObservableObject, Identifiable {
         var items: [items_main_cateroties] = []
         
         AF.request(ServerAPI.settings.url(method: "subcategories", dev: true), method: .get , parameters: ["id" : id, "shop_id": ServerAPI.settings.shop_id]).responseJSON { (response) in
-      
-        
+            
+            
             if (response.value != nil && response.response?.statusCode == 200) {
                 
                 let json = JSON(response.value!)
@@ -363,15 +363,16 @@ public class Items: ObservableObject, Identifiable {
                     return
                 }
                 
-               
+                
                 for i in 0...json.count - 1 {
                     let object = json[i]
                     let name = object["name"].string!
                     var list : [items_structure] = []
                     
                     for j in 0...object["items"].count - 1  {
+                        
                         let item_AF = object["items"][j]
-//                        math discount
+                        //                        math discount
                         let price_AF = Float(item_AF["discount"].int!) / 100
                         let discount_AF = item_AF["price"].float! * price_AF
                         let discount_final = item_AF["price"].float! - discount_AF
@@ -388,14 +389,14 @@ public class Items: ObservableObject, Identifiable {
                                 parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
                             }
                         }
-                       
-                  
+                        
+                        
                         var images : [String] = []
                         for k in 0...item_AF["images"].count-1{
                             images.append(item_AF["images"][k].string!)
                         }
                         
-//                        add all items in list
+                        //                        add all items in list
                         list.append(items_structure(id: item_AF["id"].int!,
                                                     title: item_AF["name"].string!,
                                                     price: String(format:"%.2f", item_AF["price"].float!),
@@ -413,7 +414,7 @@ public class Items: ObservableObject, Identifiable {
                                                     amount: item_AF["quantity"].int!))
                         
                     }
-//                    add object to main view with attachment
+                    //                    add object to main view with attachment
                     ServerAPI.items.objectWillChange.send()
                     items.append(items_main_cateroties(id: i, items: list, name: name))
                 }
@@ -426,5 +427,79 @@ public class Items: ObservableObject, Identifiable {
             }
         }
         
+    }
+    
+    public func get_item(id: Int,completionHandlerItem: @escaping (_ success:Bool,_ object: items_structure) -> Void){
+        
+        AF.request(ServerAPI.settings.url(method: "item", dev: true), method: .get , parameters: ["id" : id]).responseJSON { (response) in
+            if (response.value != nil && response.response?.statusCode == 200) {
+                
+                var object : items_structure = items_structure()
+                let json = JSON(response.value!)
+                
+                print(json)
+                
+                if (json.count == 0) {
+                    DispatchQueue.main.async {
+                        completionHandlerItem(false, items_structure())
+                    }
+                    return
+                }
+                
+                
+                
+                let item_AF = json[0]
+                //                        math discount
+                let price_AF = Float(item_AF["discount"].int!) / 100
+                let discount_AF = item_AF["price"].float! * price_AF
+                let discount_final = item_AF["price"].float! - discount_AF
+                let final = discount_final
+                
+                let parameter_AF = item_AF["specification"]
+                var parameters : [parameters_structure] = []
+                
+                if (parameter_AF.count > 0){
+                    for k in 0...parameter_AF.count - 1 {
+                        let parameter_single = parameter_AF[k]
+                        let name = parameter_single["name"].string!
+                        let value = parameter_single["value"].string!
+                        parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
+                    }
+                }
+                
+                
+                var images : [String] = []
+                for k in 0...item_AF["images"].count-1{
+                    images.append(item_AF["images"][k].string!)
+                }
+                
+                //                        add all items in list
+                object = items_structure(id: item_AF["id"].int!,
+                                         title: item_AF["name"].string!,
+                                         price: String(format:"%.2f", item_AF["price"].float!),
+                                         text: item_AF["description"].string!,
+                                         thubnail: item_AF["preview_image"].string!,
+                                         price_float: item_AF["price"].float!,
+                                         all_images: images,
+                                         parameters: parameters,
+                                         type: item_AF["type"].string!,
+                                         quanity: "\(item_AF["unit_type"].int!)",
+                                         discount: String(format:"%.2f", final),
+                                         discount_value: item_AF["discount"].int!,
+                                         discount_present: "-\(item_AF["discount"].int!)%",
+                                         rating: item_AF["rating"].int!,
+                                         amount: item_AF["quantity"].int!)
+                
+                
+                //                    add object to main view with attachment
+                ServerAPI.items.objectWillChange.send()
+                
+                DispatchQueue.main.async {
+                    completionHandlerItem(true, object)
+                }
+                
+                
+            }
+        }
     }
 }
