@@ -131,6 +131,10 @@ public class Settings: ObservableObject, Identifiable {
                     self.public_id = settings["public_id"].string!
                     
                     
+                    self.order_minimal_price = settings["min_order_price"].float!
+                    self.order_free_delivery_price = settings["min_delivery_price"].float!
+                    self.news_block_title = settings["news_title"].string!
+                    
                     DispatchQueue.main.async {
                         completionHandlerSettings(true)
                     }
@@ -160,6 +164,10 @@ public class Settings: ObservableObject, Identifiable {
                 self.foreground = settings["foreground"].string!
                 self.public_id = settings["public_id"].string!
                 
+                
+                self.order_minimal_price = settings["min_order_price"].float!
+                self.order_free_delivery_price = settings["min_delivery_price"].float!
+                self.news_block_title = settings["news_title"].string!
                 
                 DispatchQueue.main.async {
                     completionHandlerSettings(true)
