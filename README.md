@@ -68,3 +68,30 @@ ServerAPI.user.registration {
 
 For the rest of the data, see wiki page
 
+## Logs
+
+Send to the server information about the user action to display statistics
+
+```swift
+ServerAPI.settings.log(action: "open_news_notification", about: "\(object.id)")
+
+open_item
+share_item
+share_news
+open_item_search
+open_story
+open_news
+open_item_from_news
+open_item_subcategory
+open_item_chat
+open_order_history
+open_app
+close_app
+open_load
+
+```
+
+
+
+
+
