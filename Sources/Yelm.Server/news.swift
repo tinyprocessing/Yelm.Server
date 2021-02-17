@@ -222,7 +222,7 @@ public class News: ObservableObject, Identifiable {
                 }
                 
                 
-                let object = json[0]
+                let object = json
                 
                 let type : String = object["type"].string!
                 var stories : [story_structure] = []
