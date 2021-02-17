@@ -30,6 +30,8 @@ public class Settings: ObservableObject, Identifiable {
     public var currency : String = ""
     public var symbol : String = ""
     
+    private var develope : Bool = true
+    
 //    colors
     public var theme : String = ""
     public var foreground : String = ""
