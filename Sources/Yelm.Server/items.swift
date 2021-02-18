@@ -502,4 +502,33 @@ public class Items: ObservableObject, Identifiable {
             }
         }
     }
+    
+    
+    public func get_catalog(completionHandlerCatalog: @escaping (_ success:Bool,_ object: categories_structure) -> Void){
+        
+        AF.request(ServerAPI.settings.url(method: "categories", dev: true), method: .get).responseJSON { (response) in
+            if (response.value != nil && response.response?.statusCode == 200) {
+                
+                var object : categories_structure = categories_structure()
+                let json = JSON(response.value!)
+                
+                print(json)
+                
+                if (json.count == 0) {
+                    DispatchQueue.main.async {
+                        completionHandlerCatalog(false, object)
+                    }
+                    return
+                }
+                
+                
+                
+                DispatchQueue.main.async {
+                    completionHandlerCatalog(true, object)
+                }
+                
+                
+            }
+        }
+    }
 }
