@@ -8,6 +8,21 @@
 import Foundation
 
 
+
+public struct categories_structure: Identifiable, Hashable  {
+    
+    public init(id: Int = 0, name: String = "", image: String = "") {
+        self.id = id
+        self.name = name
+        self.image = image
+    }
+
+    public var id : Int = 0
+    public var name : String = ""
+    public var image : String = ""
+}
+
+
 public struct promocode_structure: Identifiable, Hashable  {
     
     public init(id: Int = 0, type: Promocodes = .nonactive, value: Int = 0) {
