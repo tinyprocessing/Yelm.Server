@@ -503,13 +503,13 @@ public class Items: ObservableObject, Identifiable {
         }
     }
     
-    
-    public func get_catalog(completionHandlerCatalog: @escaping (_ success:Bool,_ object: categories_structure) -> Void){
+    public func get_catalog(completionHandlerCatalog: @escaping (_ success:Bool,_ object: [categories_local_structure]) -> Void){
         
+        print(ServerAPI.settings.url(method: "categories", dev: true))
         AF.request(ServerAPI.settings.url(method: "categories", dev: true), method: .get).responseJSON { (response) in
             if (response.value != nil && response.response?.statusCode == 200) {
                 
-                var object : categories_structure = categories_structure()
+                var object : [categories_local_structure] = []
                 let json = JSON(response.value!)
                 
                 print(json)
@@ -522,6 +522,11 @@ public class Items: ObservableObject, Identifiable {
                 }
                 
                 
+                for i in 0...json.count - 1 {
+                    object.append(categories_local_structure(id: json[i]["id"].int!,
+                                                             name: json[i]["name"].string!,
+                                                             image: json[i]["image"].string!))
+                }
                 
                 DispatchQueue.main.async {
                     completionHandlerCatalog(true, object)
