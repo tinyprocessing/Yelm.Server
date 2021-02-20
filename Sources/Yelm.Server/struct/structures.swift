@@ -9,7 +9,7 @@ import Foundation
 
 
 
-public struct categories_structure: Identifiable, Hashable  {
+public struct categories_local_structure: Identifiable, Hashable  {
     
     public init(id: Int = 0, name: String = "", image: String = "") {
         self.id = id
@@ -136,7 +136,7 @@ public struct modificator_structure: Identifiable, Hashable {
     public var value: Float
 }
 
-public struct cateroties_structure: Identifiable, Hashable {
+public struct categories_structure: Identifiable, Hashable {
     public var id: Int
     /// Name
     public var title: String = ""
