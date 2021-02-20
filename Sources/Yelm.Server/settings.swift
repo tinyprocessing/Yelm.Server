@@ -17,7 +17,7 @@ let version : String = "3.0"
 
 public class Settings: ObservableObject, Identifiable {
     public var id: Int = 0
-    var domain : String = "https://rest.yelm.io/api/"
+    var domain : String = "https://rest.yelm.io/api/mobile/"
     var domain_beta : String = "https://dev.yelm.io/api/mobile/"
     public var position : String = ""
     var platform : String = ""
@@ -30,7 +30,7 @@ public class Settings: ObservableObject, Identifiable {
     public var currency : String = ""
     public var symbol : String = ""
     
-    private var develope : Bool = true
+    private var develope : Bool = false
     
 //    colors
     public var theme : String = ""
@@ -43,7 +43,7 @@ public class Settings: ObservableObject, Identifiable {
     public var deliverly_price : Float = 0
     
     
-    public var news_block_title : String = "Давай дружить!"
+    public var news_block_title : String = ""
     public var order_minimal_price : Float = 300
     public var order_free_delivery_price : Float = 1500
     
@@ -60,7 +60,7 @@ public class Settings: ObservableObject, Identifiable {
         var url : String = ""
         if (Locale.current.regionCode != nil && Locale.current.languageCode != nil){
             
-            if (dev == false){
+            if (self.develope == false){
                 url = self.domain
             }else{
                 url = self.domain_beta
@@ -77,7 +77,7 @@ public class Settings: ObservableObject, Identifiable {
             
         }else{
 
-            if (dev == false){
+            if (self.develope == false){
                 url = self.domain
             }else{
                 url = self.domain_beta
