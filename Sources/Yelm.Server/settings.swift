@@ -36,6 +36,9 @@ public class Settings: ObservableObject, Identifiable {
     public var theme : String = ""
     public var foreground : String = ""
     
+    public var catalog_title_show : Bool = true
+    public var catalog_title_color : String = ""
+    
     public var shop_id : Int = 0
     
     public var public_id : String = ""
