@@ -43,6 +43,7 @@ public class Orders: ObservableObject, Identifiable {
                 order.longitude = json["longitude"].string!
                 order.latitude = json["latitude"].string!
                 
+                order.ofd = ""
                 
                 var list : [items_structure] = []
                 
