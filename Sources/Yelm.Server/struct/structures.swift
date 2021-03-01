@@ -71,7 +71,7 @@ public struct orders_history_count_structure: Identifiable, Hashable {
 
 public struct orders_history_structure: Identifiable, Hashable {
     
-    public init(id: Int, comment: String = "", items: [items_structure] = [], address: String = "", payment: String = "", phone: String = "", items_count: [orders_history_count_structure] = [], end_total: Float = 0.0, created_at: String = "", transaction_status: String = "", latitude: String = "", longitude: String = "") {
+    public init(id: Int, comment: String = "", items: [items_structure] = [], address: String = "", payment: String = "", phone: String = "", items_count: [orders_history_count_structure] = [], end_total: Float = 0.0, created_at: String = "", transaction_status: String = "", latitude: String = "", longitude: String = "", ofd: String = "") {
         self.id = id
         self.comment = comment
         self.items = items
@@ -84,6 +84,7 @@ public struct orders_history_structure: Identifiable, Hashable {
         self.transaction_status = transaction_status
         self.latitude = latitude
         self.longitude = longitude
+        self.ofd = ofd
     }
     
     
@@ -103,6 +104,8 @@ public struct orders_history_structure: Identifiable, Hashable {
     
     public var latitude : String = ""
     public var longitude : String = ""
+    
+    public var ofd : String = ""
 }
 
 public struct images_structure: Identifiable, Hashable {

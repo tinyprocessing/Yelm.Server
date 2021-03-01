@@ -16,6 +16,10 @@ public class Orders: ObservableObject, Identifiable {
     public var id: Int = 0
     
     
+    /// History
+    /// - Parameters:
+    ///   - id: id of order
+    ///   - completionHandlerHistory: orders_history_structure
     public func get_order_history(id: String, completionHandlerHistory: @escaping (_ success:Bool, _ object : orders_history_structure) -> Void){
         
         var order : orders_history_structure = orders_history_structure(id: 0)
