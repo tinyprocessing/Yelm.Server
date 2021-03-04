@@ -19,36 +19,36 @@ public class Settings: ObservableObject, Identifiable {
     public var id: Int = 0
     var domain : String = "https://rest.yelm.io/api/mobile/"
     var domain_beta : String = "https://dev.yelm.io/api/mobile/"
-    public var position : String = ""
+    @Published public var position : String = ""
     var platform : String = ""
-    public var debug : Bool = true
+    @Published public var debug : Bool = true
     
 //    Settings for application from server
-    public var deliverly : Bool = false
-    public var takeoff : Bool = false
-    public var payments : Bool = false
-    public var currency : String = ""
-    public var symbol : String = ""
+    @Published public var deliverly : Bool = false
+    @Published public var takeoff : Bool = false
+    @Published public var payments : Bool = false
+    @Published public var currency : String = ""
+    @Published public var symbol : String = ""
     
-    private var develope : Bool = false
+    @Published private var develope : Bool = false
     
 //    colors
-    public var theme : String = ""
-    public var foreground : String = ""
+    @Published public var theme : String = ""
+    @Published public var foreground : String = ""
     
-    public var catalog_title_show : Bool = true
-    public var catalog_title_color : String = ""
+    @Published public var catalog_title_show : Bool = true
+    @Published public var catalog_title_color : String = ""
     
-    public var shop_id : Int = 0
+    @Published public var shop_id : Int = 0
     
-    public var public_id : String = ""
-    public var deliverly_time : String = ""
-    public var deliverly_price : Float = 0
+    @Published public var public_id : String = ""
+    @Published public var deliverly_time : String = ""
+    @Published public var deliverly_price : Float = 0
     
     
-    public var news_block_title : String = ""
-    public var order_minimal_price : Float = 300
-    public var order_free_delivery_price : Float = 1500
+    @Published public var news_block_title : String = ""
+    @Published public var order_minimal_price : Float = 300
+    @Published public var order_free_delivery_price : Float = 1500
     
 
     /// Get url to connect rest api
@@ -127,11 +127,13 @@ public class Settings: ObservableObject, Identifiable {
 //                    Setup currency
                     ServerAPI.objectWillChange.send()
                     self.currency = json["currency"].string!
+                    ServerAPI.objectWillChange.send()
                     self.symbol = json["symbol"].string!
                     ServerAPI.objectWillChange.send()
                     self.shop_id = json["shop_id"].int!
                     ServerAPI.objectWillChange.send()
                     self.theme = settings["theme"].string!
+                    ServerAPI.objectWillChange.send()
                     self.foreground = settings["foreground"].string!
                     self.public_id = settings["public_id"].string!
                     
