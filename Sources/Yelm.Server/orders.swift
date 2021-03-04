@@ -174,7 +174,8 @@ public class OrdersDetail: ObservableObject, Identifiable {
                 currency : String = "",
                 start_price : Float = 0.0,
                 parameters: [String : Any] = [:],
-                shop_id : Int = 0) {
+                shop_id : Int = 0,
+                discount_type : String = "") {
         
         self.id = id
         self.phone = phone
@@ -193,6 +194,7 @@ public class OrdersDetail: ObservableObject, Identifiable {
         self.currency_value = currency
         self.start_price = start_price
         self.shop_id = shop_id
+        self.discount_type = discount_type
     }
     
     public var id: Int = 0
@@ -212,6 +214,7 @@ public class OrdersDetail: ObservableObject, Identifiable {
     public var items : JSON = JSON()
     public var parameters : [String : Any] = [:]
     public var shop_id: Int = ServerAPI.settings.shop_id
+    public var discount_type: String = ""
     
     func build() -> [String : Any] {
         self.parameters = [:]
@@ -233,7 +236,8 @@ public class OrdersDetail: ObservableObject, Identifiable {
             "login" : ServerAPI.user.username,
             "delivery_price" : self.delivery_price,
             "currency" : self.currency_value,
-            "shop_id" : self.shop_id
+            "shop_id" : self.shop_id,
+            "discount_type" : self.discount_type
         ]
         
         return self.parameters
