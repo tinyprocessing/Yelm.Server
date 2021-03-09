@@ -29,7 +29,7 @@ public class Orders: ObservableObject, Identifiable {
             if (response.value != nil && response.response?.statusCode == 200) {
                 
                 let json = JSON(response.value!)
-                print(json)
+                
                 
                 order.id = Int(id)!
                 order.comment = json["comment"].string!
@@ -118,13 +118,10 @@ public class Orders: ObservableObject, Identifiable {
     public func set_order(order: OrdersDetail, completionHandlerOrder: @escaping (_ success:Bool) -> Void){
         
         
-        print(order.build())
+        
         
         AF.request(ServerAPI.settings.url(method: "order", dev: true), method: .post, parameters: order.build()).responseJSON { (response) in
         
-            
-            print(response.request?.httpBody)
-            print(response.request?.urlRequest)
             
             if (response.value != nil && response.response?.statusCode == 200) {
                 

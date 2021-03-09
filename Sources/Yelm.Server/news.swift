@@ -140,7 +140,7 @@ public class News: ObservableObject, Identifiable {
                     
                     
                     let object = json
-                    print(object)
+                    
                     
                  
                     
@@ -212,7 +212,7 @@ public class News: ObservableObject, Identifiable {
                 var object_value : news_structure = news_structure(id: 0)
                 let json = JSON(response.value!)
                 
-                print(json)
+                
                 
                 if (json.count == 0) {
                     DispatchQueue.main.async {

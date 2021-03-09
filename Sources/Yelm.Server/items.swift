@@ -437,7 +437,7 @@ public class Items: ObservableObject, Identifiable {
                 var object : items_structure = items_structure()
                 let json = JSON(response.value!)
                 
-                print(json)
+                
                 
                 if (json.count == 0) {
                     DispatchQueue.main.async {
@@ -505,14 +505,14 @@ public class Items: ObservableObject, Identifiable {
     
     public func get_catalog(completionHandlerCatalog: @escaping (_ success:Bool,_ object: [categories_local_structure]) -> Void){
         
-        print(ServerAPI.settings.url(method: "categories", dev: true))
+        
         AF.request(ServerAPI.settings.url(method: "categories", dev: true), method: .get).responseJSON { (response) in
             if (response.value != nil && response.response?.statusCode == 200) {
                 
                 var object : [categories_local_structure] = []
                 let json = JSON(response.value!)
                 
-                print(json)
+                
                 
                 if (json.count == 0) {
                     DispatchQueue.main.async {
