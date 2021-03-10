@@ -7,7 +7,8 @@ let package = Package(
     name: "Yelm.Server",
     platforms: [
         .iOS(.v13),
-        .watchOS(.v5)
+        .watchOS(.v5),
+        .macOS(.v10_15)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
