@@ -1,7 +1,7 @@
 // Server File.swift - contains object class to work with server api.yelm.io
 
 //libs
-import DeviceKit
+
 import Alamofire
 import SwiftyJSON
 import Combine

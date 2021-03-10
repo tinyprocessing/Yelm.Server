@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DeviceKit
+
 import Alamofire
 import SwiftyJSON
 import Combine

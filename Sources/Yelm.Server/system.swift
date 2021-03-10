@@ -5,11 +5,11 @@
 //  Created by Michael on 07.01.2021.
 //
 
+
 import Foundation
 import Alamofire
 import SwiftUI
 import SwiftyJSON
-import DeviceKit
 
 
 open class System: ObservableObject, Identifiable {
@@ -68,3 +68,5 @@ open class System: ObservableObject, Identifiable {
     
   
 }
+
+
