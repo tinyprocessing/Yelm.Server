@@ -473,6 +473,7 @@ public enum Device {
       default: return unknown(identifier)
       }
     #endif
+    return unknown(identifier)
   }
 
   /// Get the real device from a device.
@@ -662,6 +663,7 @@ public enum Device {
     #elseif os(tvOS)
       return (width: -1, height: -1)
     #endif
+    return (width: -1, height: -1)
   }
 
   #if os(iOS)
@@ -903,6 +905,7 @@ public enum Device {
     #elseif os(watchOS)
       return allWatches
     #endif
+    return []
   }
 
   /// All simulators
@@ -956,8 +959,11 @@ public enum Device {
     #if os(watchOS)
     return WKInterfaceDevice.current().name
     #else
-    return UIDevice.current.name
+        #if os(iOS)
+        return UIDevice.current.name
+        #endif
     #endif
+    return ""
   }
 
   /// The name of the operating system running on the device represented by the receiver (e.g. "iOS" or "tvOS").
@@ -966,8 +972,11 @@ public enum Device {
     #if os(watchOS)
     return WKInterfaceDevice.current().systemName
     #else
-    return UIDevice.current.systemName
+        #if os(iOS)
+        return UIDevice.current.systemName
+        #endif
     #endif
+    return ""
   }
 
   /// The current version of the operating system (e.g. 8.4 or 9.2).
@@ -976,8 +985,11 @@ public enum Device {
     #if os(watchOS)
     return WKInterfaceDevice.current().systemVersion
     #else
-    return UIDevice.current.systemVersion
+        #if os(iOS)
+        return UIDevice.current.systemVersion
+        #endif
     #endif
+    return ""
   }
 
   /// The model of the device (e.g. "iPhone" or "iPod Touch").
@@ -986,8 +998,11 @@ public enum Device {
     #if os(watchOS)
     return WKInterfaceDevice.current().model
     #else
-    return UIDevice.current.model
+        #if os(iOS)
+        return UIDevice.current.model
+        #endif
     #endif
+    return ""
   }
 
   /// The model of the device as a localized string.
@@ -996,8 +1011,11 @@ public enum Device {
     #if os(watchOS)
     return WKInterfaceDevice.current().localizedModel
     #else
-    return UIDevice.current.localizedModel
+        #if os(iOS)
+        return UIDevice.current.localizedModel
+        #endif
     #endif
+    return ""
   }
 
   /// PPI (Pixels per Inch) on the current device's screen (if applicable). When the device is not applicable this property returns nil.
@@ -1085,6 +1103,7 @@ public enum Device {
     #elseif os(tvOS)
     return nil
     #endif
+    return nil
   }
 
   /// True when a Guided Access session is currently active; otherwise, false.
@@ -1203,6 +1222,7 @@ extension Device: CustomStringConvertible {
       case .unknown(let identifier): return identifier
       }
     #endif
+    return ""
   }
 
   /// A safe version of `description`.
@@ -1298,6 +1318,7 @@ extension Device: CustomStringConvertible {
       case .unknown(let identifier): return identifier
       }
     #endif
+    return ""
   }
 
 }

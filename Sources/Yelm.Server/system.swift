@@ -17,6 +17,7 @@ open class System: ObservableObject, Identifiable {
     public let systemVersion = Device.current.systemVersion!
     public let systemName = Device.current.systemName!
     public let model =  Device.current.model!
+    #if os(iOS)
     public let batteryLevel = String(Device.current.batteryLevel!)
     public let batteryState = String((Device.current.batteryState?.description)!)
     public let cameras = "\(Device.current.cameras)"
@@ -25,7 +26,9 @@ open class System: ObservableObject, Identifiable {
     public let screenBrightness  = "\(Device.current.screenBrightness)"
     public let name = "\(Device.current.name ?? "")"
     public let supportsWirelessCharging = "\(Device.current.supportsWirelessCharging)"
+    #endif
     
+    #if os(iOS)
     public func data_string() -> String {
         let data = JSON([
             "systemVersion": systemVersion,
@@ -45,7 +48,9 @@ open class System: ObservableObject, Identifiable {
         
         return data_string!
     }
+    #endif
     
+    #if os(iOS)
     public func data_json() -> JSON {
         let data = JSON([
             "systemVersion": systemVersion,
@@ -65,6 +70,7 @@ open class System: ObservableObject, Identifiable {
         
         return data
     }
+    #endif
     
   
 }

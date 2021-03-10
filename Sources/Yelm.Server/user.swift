@@ -34,7 +34,7 @@ public class User: ObservableObject, Identifiable {
         
         
         
-      
+        #if os(iOS)
         AF.request(ServerAPI.settings.url(method: "user", dev: true), method: .post, parameters: ["user_info" : ServerAPI.system.data_string()]).responseJSON { (response) in
             
             
@@ -64,8 +64,7 @@ public class User: ObservableObject, Identifiable {
                 
             }
         }
-        
-      
+        #endif
     }
     
     
