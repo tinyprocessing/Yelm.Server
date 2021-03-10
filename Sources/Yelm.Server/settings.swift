@@ -15,7 +15,7 @@ import SystemConfiguration
 let version : String = "3.0"
 
 
-public class Settings: ObservableObject, Identifiable {
+ public class Settings: ObservableObject, Identifiable {
     public var id: Int = 0
     var domain : String = "https://rest.yelm.io/api/mobile/"
     var domain_beta : String = "https://dev.yelm.io/api/mobile/"
