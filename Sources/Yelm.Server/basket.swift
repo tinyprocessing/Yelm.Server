@@ -42,6 +42,8 @@ public class Basket: ObservableObject, Identifiable {
                 
                 ServerAPI.settings.deliverly_time = json["delivery"]["time"].string!
                 ServerAPI.settings.deliverly_price = json["delivery"]["price"].float!
+                ServerAPI.settings.deliverly_type = json["type"].string!
+                ServerAPI.settings.deliverly_time_work = json["time_work"].string!
                 
                 var list : [orders_history_count_structure] = []
                 if (json["deleted_id"].count > 0){
