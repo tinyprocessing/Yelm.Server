@@ -52,6 +52,12 @@ let version : String = "3.1"
     @Published public var order_minimal_price : Float = 300
     @Published public var order_free_delivery_price : Float = 1500
     
+//    Payments System
+    @Published public var payments_applepay : Bool = false
+    @Published public var payments_card : Bool = false
+    @Published public var payments_placeorder : Bool = false
+    
+    
 
     /// Get url to connect rest api
     /// - Parameter method: Method Name - example m-application
