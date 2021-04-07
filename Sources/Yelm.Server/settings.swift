@@ -131,6 +131,7 @@ let version : String = "3.1"
                     
                     
                     let settings = json["settings"]
+                    print(settings)
 
 //                    Setup currency
                     ServerAPI.objectWillChange.send()
@@ -144,6 +145,13 @@ let version : String = "3.1"
                     ServerAPI.objectWillChange.send()
                     self.foreground = settings["foreground"].string!
                     self.public_id = settings["public_id"].string!
+                    
+                    
+//                    Payment Load
+                    ServerAPI.objectWillChange.send()
+                    self.payments_applepay = settings["payment"]["applepay"].bool!
+                    self.payments_placeorder = settings["payment"]["placeorder"].bool!
+                    self.payments_card = settings["payment"]["card"].bool!
                     
                     
                     self.order_minimal_price = settings["min_order_price"].float!
