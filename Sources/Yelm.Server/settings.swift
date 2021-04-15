@@ -35,6 +35,8 @@ let version : String = "3.1"
 //    colors
     @Published public var theme : String = ""
     @Published public var foreground : String = ""
+    @Published public var theme_catalog : String = ""
+
     
     @Published public var catalog_title_show : Bool = true
     @Published public var catalog_title_color : String = ""
@@ -146,6 +148,8 @@ let version : String = "3.1"
                     self.foreground = settings["foreground"].string!
                     self.public_id = settings["public_id"].string!
                     
+                    ServerAPI.objectWillChange.send()
+                    self.theme_catalog = settings["theme_category"].string!
                     
 //                    Payment Load
                     ServerAPI.objectWillChange.send()
@@ -176,16 +180,28 @@ let version : String = "3.1"
                 
                 let settings = json["settings"]
 
-//                    Setup currency
+//                  Setup currency
                 ServerAPI.objectWillChange.send()
                 self.currency = json["currency"].string!
+                ServerAPI.objectWillChange.send()
                 self.symbol = json["symbol"].string!
                 ServerAPI.objectWillChange.send()
                 self.shop_id = json["shop_id"].int!
                 ServerAPI.objectWillChange.send()
                 self.theme = settings["theme"].string!
+                ServerAPI.objectWillChange.send()
                 self.foreground = settings["foreground"].string!
                 self.public_id = settings["public_id"].string!
+                
+                ServerAPI.objectWillChange.send()
+                self.theme_catalog = settings["theme_category"].string!
+
+                
+//                    Payment Load
+                ServerAPI.objectWillChange.send()
+                self.payments_applepay = settings["payment"]["applepay"].bool!
+                self.payments_placeorder = settings["payment"]["placeorder"].bool!
+                self.payments_card = settings["payment"]["card"].bool!
                 
                 
                 self.order_minimal_price = settings["min_order_price"].float!
