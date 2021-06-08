@@ -56,6 +56,7 @@ public class Items: ObservableObject, Identifiable {
                         if (parameter_AF.count > 0){
                             for k in 0...parameter_AF.count - 1 {
                                 let parameter_single = parameter_AF[k]
+//                                print(item_AF)
                                 let name = parameter_single["name"].string!
                                 let value = parameter_single["value"].string!
                                 parameters.append(parameters_structure(id: item_AF["id"].int!, name: name, value: value))
@@ -197,6 +198,7 @@ public class Items: ObservableObject, Identifiable {
                         
                         
                         var list : [items_structure] = []
+                        
                         
                         for j in 0...object["items"].count - 1  {
                             let item_AF = object["items"][j]

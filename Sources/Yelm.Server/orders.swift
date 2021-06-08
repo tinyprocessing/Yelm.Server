@@ -173,7 +173,8 @@ public class OrdersDetail: ObservableObject, Identifiable {
                 parameters: [String : Any] = [:],
                 shop_id : Int = 0,
                 discount_type : String = "",
-                cutlery : Int = 1) {
+                cutlery : Int = 1,
+                total_bonus: Int = 0) {
         
         self.id = id
         self.phone = phone
@@ -194,6 +195,7 @@ public class OrdersDetail: ObservableObject, Identifiable {
         self.shop_id = shop_id
         self.discount_type = discount_type
         self.cutlery = cutlery
+        self.total_bonus = total_bonus
     }
     
     public var id: Int = 0
@@ -215,6 +217,7 @@ public class OrdersDetail: ObservableObject, Identifiable {
     public var shop_id: Int = ServerAPI.settings.shop_id
     public var discount_type: String = ""
     public var cutlery: Int = 1
+    public var total_bonus: Int = 0
     
     func build() -> [String : Any] {
         self.parameters = [:]
@@ -238,7 +241,8 @@ public class OrdersDetail: ObservableObject, Identifiable {
             "currency" : self.currency_value,
             "shop_id" : self.shop_id,
             "discount_type" : self.discount_type,
-            "cutlery" : self.cutlery
+            "cutlery" : self.cutlery,
+            "total_bonus" : self.total_bonus
         ]
         
         return self.parameters
