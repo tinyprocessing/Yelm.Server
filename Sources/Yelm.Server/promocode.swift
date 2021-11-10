@@ -18,7 +18,7 @@ public class Promocode: ObservableObject, Identifiable {
     
     
  
-    public func get(promo: String = "", user: String = ServerAPI.user.username, completionHandlerPromocode: @escaping (_ success:Bool, _ message : String, _ promocode:promocode_structure) -> Void) {
+    public func get(promo: String = "", user: String = ServerAPI.user.username, completionHandlerPromocode:   _ message : String, _ promocode:promocode_structure) -> Void) {
         
         
         AF.request(ServerAPI.settings.url(method: "promocode", dev: true), method: .post, parameters: ["login": user, "promocode" : promo]).responseJSON { (response) in
